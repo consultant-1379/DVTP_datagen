@@ -1,0 +1,191 @@
+#
+# Created on 27 Sep 2012
+#
+# @author: epstvxj
+#
+
+###########################################################
+#  GPEH 
+###########################################################
+[ggsn]
+
+[basic]
+
+# chose which encoder to encode GPEH files
+# either W13A_CN1 or W11B_CF2
+encoder_version=W13A_CN1
+
+#
+# Start and end time range of files in the master repository
+# Time range should be within 24 hour
+#
+lookup_timerange_start = 20130604000203
+lookup_timerange_end =   20130604235943
+
+# ggsn master file repository
+input_directory = /ossrc/mtn_data/4th
+
+# number of rncs to produce
+number_of_rncs = 20
+
+# rop time period
+rop_time_period = 1
+
+mz_property_file_directory = /eniq/home/dcuser/data-archive/ggsn/mz/etc
+mz_property_filename = configuration.properties
+
+mzsh            = /eniq/mediation_sw/mediation_gw/bin/mzsh
+mz_account      = mzadmin/dr
+workgroup_name  = GGSN_simulator.WG_01
+workflow_name_prefix = GGSN_simulator.WF_01.GGSN
+
+
+[workflows]
+GGSN01 = GGSN_simulator.WF_01.GGSN01
+GGSN02 = GGSN_simulator.WF_01.GGSN02
+GGSN03 = GGSN_simulator.WF_01.GGSN03
+GGSN04 = GGSN_simulator.WF_01.GGSN04
+GGSN05 = GGSN_simulator.WF_01.GGSN05
+GGSN06 = GGSN_simulator.WF_01.GGSN06
+GGSN07 = GGSN_simulator.WF_01.GGSN07
+GGSN08 = GGSN_simulator.WF_01.GGSN08
+GGSN09 = GGSN_simulator.WF_01.GGSN09
+GGSN10 = GGSN_simulator.WF_01.GGSN10
+GGSN11 = GGSN_simulator.WF_01.GGSN11
+GGSN12 = GGSN_simulator.WF_01.GGSN12
+GGSN13 = GGSN_simulator.WF_01.GGSN13
+GGSN14 = GGSN_simulator.WF_01.GGSN14
+GGSN15 = GGSN_simulator.WF_01.GGSN15
+GGSN16 = GGSN_simulator.WF_01.GGSN16
+GGSN17 = GGSN_simulator.WF_01.GGSN17
+GGSN18 = GGSN_simulator.WF_01.GGSN18
+GGSN19 = GGSN_simulator.WF_01.GGSN19
+GGSN20 = GGSN_simulator.WF_01.GGSN20
+
+
+#
+# MediationZone will take input files from the following directory
+#
+[mz_input_directory]
+GGSN01 = /eniq/home/dcuser/data-archive/ggsn/mz/input/GGSN01
+GGSN02 = /eniq/home/dcuser/data-archive/ggsn/mz/input/GGSN02
+GGSN03 = /eniq/home/dcuser/data-archive/ggsn/mz/input/GGSN03
+GGSN04 = /eniq/home/dcuser/data-archive/ggsn/mz/input/GGSN04
+GGSN05 = /eniq/home/dcuser/data-archive/ggsn/mz/input/GGSN05
+GGSN06 = /eniq/home/dcuser/data-archive/ggsn/mz/input/GGSN06
+GGSN07 = /eniq/home/dcuser/data-archive/ggsn/mz/input/GGSN07
+GGSN08 = /eniq/home/dcuser/data-archive/ggsn/mz/input/GGSN08
+GGSN09 = /eniq/home/dcuser/data-archive/ggsn/mz/input/GGSN09
+GGSN10 = /eniq/home/dcuser/data-archive/ggsn/mz/input/GGSN10
+GGSN11 = /eniq/home/dcuser/data-archive/ggsn/mz/input/GGSN11
+GGSN12 = /eniq/home/dcuser/data-archive/ggsn/mz/input/GGSN12
+GGSN13 = /eniq/home/dcuser/data-archive/ggsn/mz/input/GGSN13
+GGSN14 = /eniq/home/dcuser/data-archive/ggsn/mz/input/GGSN14
+GGSN15 = /eniq/home/dcuser/data-archive/ggsn/mz/input/GGSN15
+GGSN16 = /eniq/home/dcuser/data-archive/ggsn/mz/input/GGSN16
+GGSN17 = /eniq/home/dcuser/data-archive/ggsn/mz/input/GGSN17
+GGSN18 = /eniq/home/dcuser/data-archive/ggsn/mz/input/GGSN18
+GGSN19 = /eniq/home/dcuser/data-archive/ggsn/mz/input/GGSN19
+GGSN20 = /eniq/home/dcuser/data-archive/ggsn/mz/input/GGSN20
+
+#
+# MediationZone will produce sgeh rop files in the following directories
+#
+[mz_output_directory]
+GGSN01 = /ossrc/GGSN/GGSN01
+GGSN02 = /ossrc/GGSN/GGSN02
+GGSN03 = /ossrc/GGSN/GGSN03
+GGSN04 = /ossrc/GGSN/GGSN04
+GGSN05 = /ossrc/GGSN/GGSN05
+GGSN06 = /ossrc/GGSN/GGSN06
+GGSN07 = /ossrc/GGSN/GGSN07
+GGSN08 = /ossrc/GGSN/GGSN08
+GGSN09 = /ossrc/GGSN/GGSN09
+GGSN10 = /ossrc/GGSN/GGSN10
+GGSN11 = /ossrc/GGSN/GGSN11
+GGSN12 = /ossrc/GGSN/GGSN12
+GGSN13 = /ossrc/GGSN/GGSN13
+GGSN14 = /ossrc/GGSN/GGSN14
+GGSN15 = /ossrc/GGSN/GGSN15
+GGSN16 = /ossrc/GGSN/GGSN16
+GGSN17 = /ossrc/GGSN/GGSN17
+GGSN18 = /ossrc/GGSN/GGSN18
+GGSN19 = /ossrc/GGSN/GGSN19
+GGSN20 = /ossrc/GGSN/GGSN20
+
+
+;
+[imsi_enrichment_options]
+GGSN01 = False
+GGSN02 = True
+GGSN03 = True
+GGSN04 = True
+GGSN05 = True
+GGSN06 = True
+GGSN07 = True
+GGSN08 = True
+GGSN09 = True
+GGSN10 = True
+GGSN11 = True
+GGSN12 = True
+GGSN13 = True
+GGSN14 = True
+GGSN15 = True
+GGSN16 = True
+GGSN17 = True
+GGSN18 = True
+GGSN19 = True
+GGSN20 = True
+
+;
+; Whether to enrich DATETIME for a particular RNC traffic
+; captured by all PCP devices
+;
+[datetime_enrichment_options]
+GGSN01 = True
+GGSN02 = True
+GGSN03 = True
+GGSN04 = True
+GGSN05 = True
+GGSN06 = True
+GGSN07 = True
+GGSN08 = True
+GGSN09 = True
+GGSN10 = True
+GGSN11 = True
+GGSN12 = True
+GGSN13 = True
+GGSN14 = True
+GGSN15 = True
+GGSN16 = True
+GGSN17 = True
+GGSN18 = True
+GGSN19 = True
+GGSN20 = True
+
+;
+; Whether to enrich GGSN IP Address for a particular RNC traffic
+; captured by all PCP devices
+;
+[ggsnip_enrichment_options]
+GGSN01 = False
+GGSN02 = True
+GGSN03 = True
+GGSN04 = True
+GGSN05 = True
+GGSN06 = True
+GGSN07 = True
+GGSN08 = True
+GGSN09 = True
+GGSN10 = True
+GGSN11 = True
+GGSN12 = True
+GGSN13 = True
+GGSN14 = True
+GGSN15 = True
+GGSN16 = True
+GGSN17 = True
+GGSN18 = True
+GGSN19 = True
+GGSN20 = True
+

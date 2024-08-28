@@ -1,0 +1,35 @@
+###########################################################
+#  Used by Ggsn Validator Monitor, 
+###########################################################
+[ggsn_validator_monitor]
+
+[basic]
+input_directory_path = /eniq/home/dcuser/data-archive/SmarTone/2012-05-16_to_2012-05-17/RNC/GPEH/SubNetwork=RNC09/MeContext=RNC09
+
+remove_after_compare = True
+
+wait_time = 15
+               
+enriched_prefix = 11101
+
+original_prefix = 45406
+
+number_of_rncs = 15
+
+[output_directories]
+output_directory1  = /ossrc/data/pmMediation/eventData/GgsnEvents_CEP/SubNetwork=RNC01/MeContext=RNC01
+output_directory2  = /ossrc/data/pmMediation/eventData/GgsnEvents_CEP/SubNetwork=RNC02/MeContext=RNC02
+output_directory3  = /ossrc/data/pmMediation/eventData/GgsnEvents_CEP/SubNetwork=RNC03/MeContext=RNC03
+output_directory4  = /ossrc/data/pmMediation/eventData/GgsnEvents_CEP/SubNetwork=RNC04/MeContext=RNC04
+output_directory5  = /ossrc/data/pmMediation/eventData/GgsnEvents_CEP/SubNetwork=RNC05/MeContext=RNC05
+output_directory6  = /ossrc/data/pmMediation/eventData/GgsnEvents_CEP/SubNetwork=RNC06/MeContext=RNC06
+output_directory7  = /ossrc/data/pmMediation/eventData/GgsnEvents_CEP/SubNetwork=RNC07/MeContext=RNC07
+output_directory8  = /ossrc/data/pmMediation/eventData/GgsnEvents_CEP/SubNetwork=RNC08/MeContext=RNC08
+output_directory9  = /ossrc/data/pmMediation/eventData/GgsnEvents_CEP/SubNetwork=RNC09/MeContext=RNC09
+output_directory10 = /ossrc/data/pmMediation/eventData/GgsnEvents_CEP/SubNetwork=RNC10/MeContext=RNC10
+output_directory11 = /ossrc/data/pmMediation/eventData/GgsnEvents_CEP/SubNetwork=RNC11/MeContext=RNC11
+output_directory12 = /ossrc/data/pmMediation/eventData/GgsnEvents_CEP/SubNetwork=RNC12/MeContext=RNC12
+output_directory13 = /ossrc/data/pmMediation/eventData/GgsnEvents_CEP/SubNetwork=RNC13/MeContext=RNC13
+output_directory14 = /ossrc/data/pmMediation/eventData/GgsnEvents_CEP/SubNetwork=RNC14/MeContext=RNC14
+output_directory15 = /ossrc/data/pmMediation/eventData/GgsnEvents_CEP/SubNetwork=RNC15/MeContext=RNC15
+

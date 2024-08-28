@@ -1,0 +1,23 @@
+The structure of the 3g Session Browser Datagen project is as follows:
+
+py_script/
+|-- datagen/
+|   |-- __main__.py,              This is the start point of the datagen tool. It is the master scripts which starts all generators and monitors.
+|   
+|  	              
+|   |-- sgeh_datagen/
+|       |-- mz.py,                This module contains methods to enable, start MZ workflows/workgroups and check the status of MZ workflows/workgroups.
+|       |-- sgeh.py,              This module contains SgehGenerator class. 
+|       |                         The main responsibility of the SgehGenerator class is to check the sgeh master file repository, copies 
+|       |                         matched rops to feed SGEH_SESSION workflows and eventually starts MZ to perform the enrichment process.
+|       |                         Additionally, it generates configuration.properties file which contains settings used by MZ.
+|   |-- ggsn_datagen/          
+|       |-- ggsn.py,              This module contains GgsnGenerator class, the primary responsibility of the GgsnGenerator is,
+|       |                           1. search target ggsn files within the master repository according to the session time specified;
+|       |                           2. copy target ggsn files to the input directory of MZ datagen GGSN_Simulator workflow 
+|       |                           3. Additionally, it generates configuration.properties file which contains settings used by MZ
+|       |                         
+|   |-- monitor.py,               This module contains methods to monitor the output directories of each generator and copy generated/enriched files to feed
+|                                 (Feature) MediationZone load balance workflow.
+|   
+

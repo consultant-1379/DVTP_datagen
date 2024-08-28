@@ -1,0 +1,127 @@
+#
+# Created on 22 Aug 2012
+#
+# @author: epstvxj
+#
+
+###########################################################
+#  SGEH 
+###########################################################
+[sgeh]
+
+[basic]
+
+#
+# Start and end time range of files in the master repository
+# Time range should be within 24 hour
+#
+lookup_timerange_start = 201205170000
+lookup_timerange_end = 201205180000
+
+# used in sgeh filename, e.g., after session start time +0800
+rop_start_timediff_sign=+
+rop_start_timediff=0800
+
+# used in sgeh filename, e.g., after session end time +0800
+rop_end_timediff_sign=+
+rop_end_timediff=0800
+
+# sgeh master file repository
+input_directory = /eniq/misc/dvtp/SGSN/sgeh
+
+# rop time period
+rop_time_period = 1
+
+mz_property_file_directory = /eniq/home/dcuser/data-archive/SmarTone/SGEH/mz/etc/
+mz_property_filename = configuration.properties
+
+mzsh            = /eniq/mediation_sw/mediation_gw/bin/mzsh
+mz_account      = mzadmin/dr
+workgroup_name  = SGEH_SESSION.SGEH_Enrichment_Group
+
+workflow_name_prefix  = SGEH_SESSION.WF01_SGEH_Enrichment.SGSN
+
+[workflows]
+SGSN01 = SGEH_SESSION.WF01_SGEH_Enrichment.SGSN01
+SGSN02 = SGEH_SESSION.WF01_SGEH_Enrichment.SGSN02
+SGSN03 = SGEH_SESSION.WF01_SGEH_Enrichment.SGSN03
+SGSN04 = SGEH_SESSION.WF01_SGEH_Enrichment.SGSN04
+SGSN05 = SGEH_SESSION.WF01_SGEH_Enrichment.SGSN05
+SGSN06 = SGEH_SESSION.WF01_SGEH_Enrichment.SGSN06
+SGSN07 = SGEH_SESSION.WF01_SGEH_Enrichment.SGSN07
+SGSN08 = SGEH_SESSION.WF01_SGEH_Enrichment.SGSN08
+SGSN09 = SGEH_SESSION.WF01_SGEH_Enrichment.SGSN09
+SGSN10 = SGEH_SESSION.WF01_SGEH_Enrichment.SGSN10
+SGSN11 = SGEH_SESSION.WF01_SGEH_Enrichment.SGSN11
+SGSN12 = SGEH_SESSION.WF01_SGEH_Enrichment.SGSN12
+
+#
+# MediationZone will take input files from the following directories
+#
+[mz_input_directory]
+SGSN01 = /eniq/home/dcuser/data-archive/SmarTone/SGEH/mz/input/SGSN01
+SGSN02 = /eniq/home/dcuser/data-archive/SmarTone/SGEH/mz/input/SGSN02
+SGSN03 = /eniq/home/dcuser/data-archive/SmarTone/SGEH/mz/input/SGSN03
+SGSN04 = /eniq/home/dcuser/data-archive/SmarTone/SGEH/mz/input/SGSN04
+SGSN05 = /eniq/home/dcuser/data-archive/SmarTone/SGEH/mz/input/SGSN05
+SGSN06 = /eniq/home/dcuser/data-archive/SmarTone/SGEH/mz/input/SGSN06
+SGSN07 = /eniq/home/dcuser/data-archive/SmarTone/SGEH/mz/input/SGSN07
+SGSN08 = /eniq/home/dcuser/data-archive/SmarTone/SGEH/mz/input/SGSN08
+SGSN09 = /eniq/home/dcuser/data-archive/SmarTone/SGEH/mz/input/SGSN09
+SGSN10 = /eniq/home/dcuser/data-archive/SmarTone/SGEH/mz/input/SGSN10
+SGSN11 = /eniq/home/dcuser/data-archive/SmarTone/SGEH/mz/input/SGSN11
+SGSN12 = /eniq/home/dcuser/data-archive/SmarTone/SGEH/mz/input/SGSN12
+
+#
+# MediationZone will produce sgeh rop files in the following directories
+#
+[mz_output_directory]
+SGSN01 = /ossrc/SGEH/sgsn01
+SGSN02 = /ossrc/SGEH/sgsn02
+SGSN03 = /ossrc/SGEH/sgsn03
+SGSN04 = /ossrc/SGEH/sgsn04
+SGSN05 = /ossrc/SGEH/sgsn05
+SGSN06 = /ossrc/SGEH/sgsn06
+SGSN07 = /ossrc/SGEH/sgsn07
+SGSN08 = /ossrc/SGEH/sgsn08
+SGSN09 = /ossrc/SGEH/sgsn09
+SGSN10 = /ossrc/SGEH/sgsn10
+SGSN11 = /ossrc/SGEH/sgsn11
+SGSN12 = /ossrc/SGEH/sgsn12
+
+;
+; Whether to enrich IMSI for a particular RNC traffic
+; captured by all PCP devices
+;
+[imsi_enrichment_options]
+SGSN01 = False
+SGSN02 = True
+SGSN03 = True
+SGSN04 = True
+SGSN05 = True
+SGSN06 = True
+SGSN07 = True
+SGSN08 = True
+SGSN09 = True
+SGSN10 = True
+SGSN11 = True
+SGSN12 = False
+
+;
+; Whether to enrich DATETIME for a particular RNC traffic
+; captured by all PCP devices
+;
+[datetime_enrichment_options]
+SGSN01 = True
+SGSN02 = True
+SGSN03 = True
+SGSN04 = True
+SGSN05 = True
+SGSN06 = True
+SGSN07 = True
+SGSN08 = True
+SGSN09 = True
+SGSN10 = True
+SGSN11 = True
+SGSN12 = True
+

@@ -1,0 +1,46 @@
+#
+# Created on 17 Aug 2012
+#
+# @author: epstvxj
+#
+
+###########################################################
+#  COMMON TO ALL TYPES OF DATA (GPEH, SGEH, USER PLANE) 
+###########################################################
+[common]
+
+#
+# To disable/enable data generation for each type of data
+#
+
+# to enable tcp-partial generator
+enable_tcp_partial                      = False 
+# tcp partial copy script
+enable_tcp_partial_monitor              = False 
+enable_tcp_partial_validator_monitor    = False
+
+# to enable classification generator
+enable_classification                   = False 
+# classification copy script
+enable_classification_monitor           = False 
+enable_classification_validator_monitor = False
+
+# to enable sgeh generator
+enable_sgeh                             = False 
+# sgeh copy script
+enable_mz_sgeh_monitor                  = False 
+enable_sgeh_validator_monitor           = False
+
+# to enable ggsn generator
+enable_ggsn                             = True 
+# ggsn copy script
+enable_mz_ggsn_monitor                  = True 
+enable_ggsn_validator_monitor           = False
+
+
+enrich_imsi      = True
+enrich_datetime  = True
+clean            = True
+realtime         = True
+
+logger_external_config = /opt/ericsson/dvtp_tool/etc/datagen_logging

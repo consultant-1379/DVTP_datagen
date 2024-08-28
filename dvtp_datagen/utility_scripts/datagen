@@ -1,0 +1,78 @@
+#!/bin/bash
+set -e
+
+function isDatagenRunning() { 
+  local __resultvariable=$1
+  local datagen_processes=`ps -elf | grep python | egrep '(datagen.__main__)'`
+  local _isRunning
+  if [ "$datagen_processes" = "" ]
+    then
+      _isRunning="false"
+  else
+      _isRunning="true"
+  fi
+  eval $__resultvariable="'$_isRunning'"
+}
+
+# This server can only be started as root
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root" 1>&2
+   exit 1
+fi
+
+isAppRunning=""
+
+case "$1" in
+    start)
+		echo "Starting 3G Session Browser Datagen"
+		isDatagenRunning isAppRunning		
+		if [ "$isAppRunning" = "false" ]
+		then
+		  su dcuser -c '/opt/ericsson/dvtp_tool/utility_scripts/datagen_start.sh'		  
+		else
+		  echo "3G Session Browser Datagen Already Started"
+		  exit 0
+		fi
+		
+		isDatagenRunning isAppRunning		
+		if [ "$isAppRunning" = "true" ]
+		then
+		  echo "3G Session Browser Datagen Started"
+		  echo "."
+		else
+		  echo "Failed to start 3G Session Browser Datagen"
+		  echo "."
+		fi
+		
+        ;;
+    stop)
+    	echo "Stopping 3G Session Browser Datagen"
+    	su dcuser -c '/opt/ericsson/dvtp_tool/utility_scripts/datagen_stop.sh'	
+		isDatagenRunning isAppRunning		
+		if [ "$isAppRunning" = "true" ]  
+		then		  		  
+		    echo "Failed to Stop 3G Session Browser Datagen"
+		else
+			echo "3G Session Browser Datagen is stopped"
+		fi
+		echo "."
+    	;;    
+    status)
+    	echo "Checking 3G Session Browser Datagen Status"
+    	su dcuser -c '/opt/ericsson/dvtp_tool/utility_scripts/datagen_status.sh'
+    	echo "."
+    	isDatagenRunning isAppRunning
+    	if [ "$isAppRunning" = "true" ]
+		then
+			echo "3G Session Browser Datagen is running"
+		else
+			echo "3G Session Browser Datagen is not running"
+		fi
+    	;;
+    *)
+        echo "Usage: $0 {start|stop|status}"
+        exit 1
+        ;;
+esac
+
+exit 0

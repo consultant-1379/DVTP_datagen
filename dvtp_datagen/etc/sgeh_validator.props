@@ -1,0 +1,43 @@
+###########################################################
+#  Used by Sgeh Validator Monitor, 
+###########################################################
+[sgeh_validator_monitor]
+
+[basic]
+input_directory_path = /eniq/home/dcuser/data-archive/SmarTone/2012-05-16_to_2012-05-17/SGSN/sgeh
+
+remove_after_compare = True
+
+original_prefix = 45406
+
+wait_time = 1
+
+[output_directories]
+output_directory1 = /ossrc/data/pmMediation/eventData/SgehEvents_CEP/ManagedElement=SGSN01
+output_directory2 = /ossrc/data/pmMediation/eventData/SgehEvents_CEP/ManagedElement=SGSN02
+output_directory3 = /ossrc/data/pmMediation/eventData/SgehEvents_CEP/ManagedElement=SGSN03
+output_directory4 = /ossrc/data/pmMediation/eventData/SgehEvents_CEP/ManagedElement=SGSN04
+output_directory5 = /ossrc/data/pmMediation/eventData/SgehEvents_CEP/ManagedElement=SGSN05
+output_directory6 = /ossrc/data/pmMediation/eventData/SgehEvents_CEP/ManagedElement=SGSN06
+output_directory7 = /ossrc/data/pmMediation/eventData/SgehEvents_CEP/ManagedElement=SGSN07
+output_directory8 = /ossrc/data/pmMediation/eventData/SgehEvents_CEP/ManagedElement=SGSN08
+
+[expected_imsi_prefixes]
+output_directory1 = 11101
+output_directory2 = 11102
+output_directory3 = 11103
+output_directory4 = 11104
+output_directory5 = 11105
+output_directory6 = 11106
+output_directory7 = 11107
+output_directory8 = 45406
+
+[datetime_enrichment_options]
+output_directory1 = True
+output_directory2 = True
+output_directory3 = True
+output_directory4 = True
+output_directory5 = True
+output_directory6 = True
+output_directory7 = True
+output_directory8 = True

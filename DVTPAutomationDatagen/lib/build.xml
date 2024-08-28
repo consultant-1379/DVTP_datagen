@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="ECDS_Events">
+	
+    <property environment="env"/>	
+    <property name="junit.output.dir" value="junit"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+	<property name="lib.dir" value="../../../cacpl-3pp-lib" />
+	<property name="dest.dir" value="build" />
+	<property name="dist.dir" value="dist" />
+	<property name="jar.name" value="${dist.dir}/${ant.project.name}.jar" />
+	
+    <path id="JUnit 4.libraryclasspath">
+        <pathelement location="${lib.dir}/junit4.jar"/>
+        <pathelement location="${lib.dir}/hamcrest.core.jar"/>
+    </path>
+    <path id="ECDS_Events.classpath">
+        <pathelement location="${dest.dir}"/>
+        <path refid="JUnit 4.libraryclasspath"/>
+        <pathelement location="${lib.dir}/commons-logging-api-1.1.1.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="${dest.dir}"/>
+        <copy includeemptydirs="false" todir="${dest.dir}">
+            <fileset dir="src">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+  	</target>
+	<target name="init-test">
+        <copy includeemptydirs="false" todir="${dest.dir}">
+            <fileset dir="test">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="${dest.dir}"/>
+    	<delete dir="${dist.dir}"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+	
+    <target name="clean-test">
+    	<delete dir="${junit.output.dir}" />
+	</target>
+    <target depends="build-subprojects,build-project" name="build"/>
+	
+    <target name="build-subprojects"/>
+	
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac includeantruntime="false" debug="true" debuglevel="${debuglevel}" destdir="${dest.dir}" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="ECDS_Events.classpath"/>
+        </javac>
+    </target>
+	<target depends="init-test" name="build-project-test">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac includeantruntime="false" debug="true" debuglevel="${debuglevel}" destdir="${dest.dir}" source="${source}" target="${target}">
+            <src path="test"/>
+            <classpath refid="ECDS_Events.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target depends="build-project,build-project-test" name="test">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.ericsson.cac.ecds.ctum.CtumTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.ebm.ActivateTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.ebm.AttachTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.ebm.DeactivateTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.ebm.IsrauTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.ebm.LAttachTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.ebm.LDedicatedBearerActivateTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.ebm.LDedicatedBearerDeactivateTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.ebm.LDetachTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.ebm.LHandoverTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.ebm.LPdnConnectTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.ebm.LPdnDisconnectTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.ebm.LServiceRequestTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.ebm.LTauTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.ebm.RauTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventAnrConfigMissingTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventBadCovEvalTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventBestCellEvalTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventIntegrityVerFailRrcMsgTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventMaxFilesizeReachedTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventMaxFilesizeRecoveryTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventMaxStoragesizeReachedTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventMaxUetracesReachedTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventMeasurementConfigTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventMsg123Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventNeighbcellChangeTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventNeighbenbChangeTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventNeighbrelAddTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventNeighbrelRemoveTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventNoResetAckFromMmeTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventPmDataCollectionLostTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventPmEventSuspectmarkedTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventPmRecordingFaultJvmTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventRrcErrorTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventS1apProtocolErrorTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventUeAnrConfigPciTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventUeAnrPciReportTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventUeMeasRejectTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventUePciCollisionTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventUnexpectedRrcMsgTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventX2ConnReleaseTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalEventX2apProtocolErrorTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalPerCapLicenseUtilRepTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalPerCellTrafficReportTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalPerHwUtilTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalPerRadioCellMeasurementTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalPerRadioUeMeasurementTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalPerRadioUtilizationTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalPerUeActiveSessionTimeTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalPerUeRbTrafficRepTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalPerUeTrafficRepTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcAnrCgiReportTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcDnsLookupTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcErabReleaseTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcErabSetupTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcHoExecS1InTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcHoExecS1OutTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcHoExecX2InTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcHoExecX2OutTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcHoPrepS1InTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcHoPrepS1OutTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcHoPrepX2InTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcHoPrepX2OutTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcInitialCtxtSetupTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcInitialCtxtSetupTestOriginal" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcReverseDnsLookupTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcRrcConnSetupTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcS1SetupTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcS1SigConnSetupTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcSctpSetupTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcSctpShutdownTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcTesteventAbortTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcTesteventBasicExtTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcTesteventBasicUeAltTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcTesteventBasicUeManyParamsTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcTesteventBasicUeTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcTesteventDiffTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcTesteventSelectRepeatTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcTesteventSelectTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcUeCtxtReleaseEnbTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalProcX2ConnSetupTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventBasicTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventBbBbmTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventBbCellTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventBbRbTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventBbUeTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventCell1Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventCell2Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventExtTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventProcBase10Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventProcBase11Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventProcBase12Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventProcBase13Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventProcBase14Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventProcBase15Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventProcBase16Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventProcBase17Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventProcBase18Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventProcBase19Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventProcBase1Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventProcBase20Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventProcBase21Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventProcBase22Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventProcBase23Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventProcBase24Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventProcBase2Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventProcBase3Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventProcBase4Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventProcBase5Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventProcBase6Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventProcBase7Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventProcBase8Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventProcBase9Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.InternalTesteventUeTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.RrcDlInformationTransferTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.RrcMasterInformationBlockTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.RrcMeasurementReportTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.RrcPagingTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.RrcRrcConnectionReEstablishmentRejectTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.RrcRrcConnectionReEstablishmentRequestTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.RrcRrcConnectionReconfigurationCompleteTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.RrcRrcConnectionReconfigurationTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.RrcRrcConnectionRejectTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.RrcRrcConnectionReleaseTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.RrcRrcConnectionRequestTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.RrcRrcConnectionSetupCompleteTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.RrcRrcConnectionSetupTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.RrcSecurityModeCommandTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.RrcSecurityModeCompleteTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.RrcSecurityModeFailureTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.RrcSystemInformationBlockType1Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.RrcSystemInformationTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.RrcUeCapabilityEnquiryTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.RrcUeCapabilityInformationTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.RrcUlInformationTransferTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1DownlinkNasTransportTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1DownlinkS1Cdma2000TunnelingTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1EnbConfigurationUpdateAcknowledgeTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1EnbConfigurationUpdateFailureTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1EnbConfigurationUpdateTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1EnbStatusTransferTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1ErabModifyRequestTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1ErabModifyResponseTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1ErabReleaseCommandTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1ErabReleaseRequestTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1ErabReleaseResponseTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1ErabSetupRequestTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1ErabSetupResponseTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1ErrorIndicationTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1HandoverCancelAcknowledgeTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1HandoverCancelTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1HandoverCommandTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1HandoverFailureTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1HandoverNotifyTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1HandoverPreparationFailureTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1HandoverRequestAcknowledgeTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1HandoverRequestTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1HandoverRequiredTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1InitialContextSetupFailureTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1InitialContextSetupRequestTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1InitialContextSetupResponseTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1InitialUeMessageTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1MmeConfigurationUpdateAcknowledgeTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1MmeConfigurationUpdateFailureTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1MmeConfigurationUpdateTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1MmeStatusTransferTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1NasNonDeliveryIndicationTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1PagingTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1PathSwitchRequestAcknowledgeTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1PathSwitchRequestFailureTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1PathSwitchRequestTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1ResetAcknowledgeTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1ResetTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1S1SetupFailureTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1S1SetupRequestTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1S1SetupResponseTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1UeCapabilityInfoIndicationTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1UeContextModificationFailureTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1UeContextModificationRequestTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1UeContextModificationResponseTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1UeContextReleaseCommandTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1UeContextReleaseCompleteTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1UeContextReleaseRequestTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1UplinkNasTransportTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.S1UplinkS1Cdma2000TunnelingTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.UeMeasEventFeatNotAvailTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.UeMeasEventNotConfigTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.UeMeasIntrafreq1Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.UeMeasIntrafreq2Test" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.UeMeasMeasurementConfigEutraPmTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.X2EnbConfigurationUpdateAcknowledgeTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.X2EnbConfigurationUpdateFailureTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.X2EnbConfigurationUpdateTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.X2ErrorIndicationTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.X2HandoverCancelTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.X2HandoverPreparationFailureTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.X2HandoverRequestAcknowledgeTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.X2HandoverRequestTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.X2ResetRequestTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.X2ResetResponseTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.X2SnStatusTransferTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.X2UeContextReleaseTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.X2X2SetupFailureTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.X2X2SetupRequestTest" todir="${junit.output.dir}"/>
+            <test name="com.ericsson.cac.ecds.enodeb.X2X2SetupResponseTest" todir="${junit.output.dir}"/>
+            <classpath refid="ECDS_Events.classpath"/>
+        </junit>
+    </target>
+    <target depends="test" name="junitreport">
+        <junitreport todir="${junit.output.dir}">
+            <fileset dir="${junit.output.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.output.dir}"/>
+        </junitreport>
+    </target>
+	<target depends="clean,build-project" name="jar">		
+		 <mkdir dir="${dist.dir}"/>		
+		<jar destfile="${jar.name}" basedir="${dest.dir}" />
+	</target>
+	
+	<target depends="clean,build-project" name="jar-ext">		
+		<mkdir dir="${dist.dir}"/>		
+		<jar destfile="${jar.name}" basedir="${dest.dir}" />
+	</target>
+		
+</project>

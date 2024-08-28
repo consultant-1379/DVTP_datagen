@@ -1,0 +1,52 @@
+###########################################################
+#  Used by the SGEH Generator, 
+#  This configuration is used by scripts to copy
+#  regenerated data into MZ and CEP input directory
+###########################################################
+[mz_sgeh_monitor]
+
+[basic]
+rop_time_period = 1
+
+# 
+# This is only used for testing purpose, 
+# should be set to False by default
+#
+ignore_session_time = False
+
+
+; directory stores all files regenerated/enriched by sgeh workflow
+[generated_file_locations]               
+generated_file_location1  = /ossrc/SGEH/sgsn01
+generated_file_location2  = /ossrc/SGEH/sgsn02
+
+#
+# Each generated_file_location<N> section contains a set of destination directories.
+# Those destination directories are input directories of CEP and MZ
+#
+[generated_file_location1]
+mz_copy_directory1 = /ossrc/data/pmMediation/eventData/sgeh/dir1
+cep_copy_directory1 = /ossrc/data/pmMediation/eventData/SgehEvents_CEP/ManagedElement=SGSN01
+
+[generated_file_location2]
+mz_copy_directory2 = /ossrc/data/pmMediation/eventData/sgeh/dir2
+cep_copy_directory2 = /ossrc/data/pmMediation/eventData/SgehEvents_CEP/ManagedElement=SGSN02
+
+
+
+
+#
+# This section contains name prefixes that will be appended to each generated file before
+# copying them to the CEP and MZ input directories
+#
+[name prefixes]
+mz_copy_directory1  = SGSN01_
+mz_copy_directory2  = SGSN02_
+
+#
+# This section defines whether to move generated files to the destination folder.
+# If False, then copy is used instead
+#
+[move]
+cep_copy_directory1  = True 
+cep_copy_directory2  = True

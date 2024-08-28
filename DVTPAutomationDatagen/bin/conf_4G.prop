@@ -1,0 +1,53 @@
+##4G conf.prop####
+NO_OF_2G3G_EVENTS=13275
+ReservedImsi=false
+NO_OF_4G_EVENTS=13275
+NO_OF_IMSI=100
+NO_OF_SGSN=2
+2G_3G_4G=false
+OSS=true
+NO_OF_WF=2
+FTP_ENB=0
+OSS_IP=159.107.220.25
+OSS_USERNAME=nmsadm
+OSS_PASSWORD=585e36352b6a6f6debef
+OSS_TARGET_DIR=/ossrc/data/sgw/sgwcg/00/sgeh/sgsn-mme/SGSN1/dir1/tmp
+Node_13B=true
+Input_2G_3G=true
+Input_4G=true
+ImsiValue=460000000123456
+doNewImsis=true
+####################2G_3G_4G=true then only_2G_3G=="false" All events
+########################2G_3G_4G=false then only_2G_3G=="false" only 4G
+########################2G_3G_4G=false then only_2G_3G=="true" only 2G3G
+####################Node_13A=true for 13A Header Version File
+####################Node_13A=false for 11A Header Version File
+
+
+##Daily Profiler##
+
+PROFILE_HOUR_0=100
+PROFILE_HOUR_1=100
+PROFILE_HOUR_2=100
+PROFILE_HOUR_3=100
+PROFILE_HOUR_4=100
+PROFILE_HOUR_5=100
+PROFILE_HOUR_6=100
+PROFILE_HOUR_7=100
+PROFILE_HOUR_8=100
+PROFILE_HOUR_9=100
+PROFILE_HOUR_10=100
+PROFILE_HOUR_11=100
+PROFILE_HOUR_12=100
+PROFILE_HOUR_13=100
+PROFILE_HOUR_14=100
+PROFILE_HOUR_15=100
+PROFILE_HOUR_16=100
+PROFILE_HOUR_17=100
+PROFILE_HOUR_18=100
+PROFILE_HOUR_19=100
+PROFILE_HOUR_20=100
+PROFILE_HOUR_21=100
+PROFILE_HOUR_22=100
+PROFILE_HOUR_23=100
+

@@ -1,0 +1,42 @@
+###########################################################
+#  Used by Staple Validator Monitor, 
+###########################################################
+[tcp_partial_validator_monitor]
+
+[basic]
+;input_directory_path = /eniq/home/dcuser/data-archive/SmarTone/2012-05-16_to_2012-05-17/Probe/staple
+input_directory_path = /home/epstvxj/Development/Temp/staple
+
+remove_after_compare = False
+
+wait_time = 5
+
+original_prefix = 45406
+
+rop_time_period = 5
+
+number_of_probes = 4
+
+[output_directories]
+output_directory1=/home/epstvxj/Development/Temp/Generated/for_cep/PCP1/staple/3G/tcpta_partial/454_06_1001
+output_directory2=/home/epstvxj/Development/Temp/Generated/for_cep/PCP2/staple/3G/tcpta_partial/454_06_1300
+output_directory3=/home/epstvxj/Development/Temp/Generated/for_cep/PCP3/staple/3G/tcpta_partial/454_06_8150
+output_directory4=/home/epstvxj/Development/Temp/Generated/for_cep/PCP4/staple/3G/tcpta_partial/454_06_8900
+
+[expected_imsi_prefixes]
+output_directory1 = 11101
+output_directory2 = 11103
+output_directory3 = 11115
+output_directory4 = 45406
+
+[datetime_enrichment_options]
+output_directory1 = True
+output_directory2 = True
+output_directory3 = True
+output_directory4 = True
+
+[probe_numbers]
+output_directory1 = 1
+output_directory2 = 2
+output_directory3 = 3
+output_directory4 = 4

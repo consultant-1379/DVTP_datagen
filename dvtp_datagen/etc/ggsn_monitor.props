@@ -1,0 +1,160 @@
+###########################################################
+#  Used by the GPEH Generator, 
+#  This configuration is used by scripts to copy
+#  regenerated data into MZ and CEP input directory
+###########################################################
+[mz_ggsn_monitor]
+               
+[basic]
+rop_time_period = 1
+
+# 
+# This is only used for testing purpose, 
+# should be set to False by default
+#
+ignore_session_time = False
+
+#
+# The following directories stores all files regenerated/enriched 
+# by ggsn workflows
+#
+[generated_file_locations]  
+generated_file_location1  = /ossrc/GGSN/GGSN01
+generated_file_location2  = /ossrc/GGSN/GGSN02
+generated_file_location3  = /ossrc/GGSN/GGSN03
+generated_file_location4  = /ossrc/GGSN/GGSN04
+generated_file_location5  = /ossrc/GGSN/GGSN05
+generated_file_location6  = /ossrc/GGSN/GGSN06
+generated_file_location7  = /ossrc/GGSN/GGSN07
+generated_file_location8  = /ossrc/GGSN/GGSN08
+generated_file_location9  = /ossrc/GGSN/GGSN09
+generated_file_location10 = /ossrc/GGSN/GGSN10
+generated_file_location11 = /ossrc/GGSN/GGSN11
+generated_file_location12 = /ossrc/GGSN/GGSN12
+generated_file_location13 = /ossrc/GGSN/GGSN13
+generated_file_location14 = /ossrc/GGSN/GGSN14
+generated_file_location15 = /ossrc/GGSN/GGSN15
+generated_file_location16 = /ossrc/GGSN/GGSN16
+generated_file_location17 = /ossrc/GGSN/GGSN17
+generated_file_location18 = /ossrc/GGSN/GGSN18
+generated_file_location19 = /ossrc/GGSN/GGSN19
+generated_file_location20 = /ossrc/GGSN/GGSN20
+
+#
+# Each generated_file_location<N> section contains a set of destination directories.
+# Those destination directories are input directories of CEP and MZ
+#
+#  NO SPACE BEFORE EACH LINE
+#
+[generated_file_location1]
+mz_copy_directory1  = /ossrc/data/pmMediation/eventData/GPEHEvents/dir1
+cep_copy_directory1  = /ossrc/00/2G3G/OJMME1 
+
+[generated_file_location2]
+mz_copy_directory2  = /ossrc/data/pmMediation/eventData/GPEHEvents/dir1
+cep_copy_directory2  = /ossrc/00/2G3G/OJSGSN1
+
+[generated_file_location3]
+cep_copy_directory3  = /ossrc/01/2G3G/ABMME1
+mz_copy_directory3  = /ossrc/data/pmMediation/eventData/GPEHEvents/dir1
+
+[generated_file_location4]
+cep_copy_directory4  = /ossrc/01/2G3G/ASMME01
+mz_copy_directory4  = /ossrc/data/pmMediation/eventData/GPEHEvents/dir1
+
+[generated_file_location5]
+cep_copy_directory5  = /ossrc/02/2G3G/ASSGSN1
+mz_copy_directory5  = /ossrc/data/pmMediation/eventData/GPEHEvents/dir1
+
+[generated_file_location6]
+cep_copy_directory6  = /ossrc/02/2G3G/IBSGSN1
+mz_copy_directory6  = /ossrc/data/pmMediation/eventData/GPEHEvents/dir1
+
+[generated_file_location7]
+cep_copy_directory7  = /ossrc/03/2G3G/ABGGSN1
+mz_copy_directory7  = /ossrc/data/pmMediation/eventData/GPEHEvents/dir1
+
+[generated_file_location8]
+cep_copy_directory8  = /ossrc/03/2G3G/ABGGSN2
+mz_copy_directory8  = /ossrc/data/pmMediation/eventData/GPEHEvents/dir1
+
+[generated_file_location9]
+cep_copy_directory9  = /ossrc/03/2G3G/ASSGSN2
+mz_copy_directory9  = /ossrc/data/pmMediation/eventData/GPEHEvents/dir1
+
+[generated_file_location10]
+cep_copy_directory10 = /ossrc/04/2G3G/ASGGSN1
+mz_copy_directory10  = /ossrc/data/pmMediation/eventData/GPEHEvents/dir1
+
+[generated_file_location11]
+mz_copy_directory11  = /ossrc/data/pmMediation/eventData/GPEHEvents/dir1
+cep_copy_directory11  = /ossrc/05/2G3G/ASGGSN2
+
+[generated_file_location12]
+mz_copy_directory12  = /ossrc/data/pmMediation/eventData/GPEHEvents/dir1
+cep_copy_directory12  = /ossrc/05/2G3G/ASMME1
+
+[generated_file_location13]
+cep_copy_directory13  = /ossrc/06/2G3G/ABMME01
+mz_copy_directory13  = /ossrc/data/pmMediation/eventData/GPEHEvents/dir1
+
+[generated_file_location14]
+cep_copy_directory14  = /ossrc/06/2G3G/ABSGSN1 
+mz_copy_directory14  = /ossrc/data/pmMediation/eventData/GPEHEvents/dir1
+
+[generated_file_location15]
+cep_copy_directory15  = /ossrc/07/2G3G/ABSGSN2
+mz_copy_directory15  = /ossrc/data/pmMediation/eventData/GPEHEvents/dir1
+
+[generated_file_location16]
+mz_copy_directory16  = /ossrc/data/pmMediation/eventData/GPEHEvents/dir1
+cep_copy_directory16  = /ossrc/07/2G3G/OJGGSN1 
+
+[generated_file_location17]
+mz_copy_directory17  = /ossrc/data/pmMediation/eventData/GPEHEvents/dir1
+cep_copy_directory17  = /ossrc/08/2G3G/OJGGSN2
+
+[generated_file_location18]
+cep_copy_directory18  = /ossrc/09/2G3G/IBGGSN1
+mz_copy_directory18  = /ossrc/data/pmMediation/eventData/GPEHEvents/dir1
+
+[generated_file_location19]
+cep_copy_directory19  = /ossrc/10/2G3G/OJSGSN2
+mz_copy_directory19  = /ossrc/data/pmMediation/eventData/GPEHEvents/dir1
+
+[generated_file_location20]
+cep_copy_directory20  = /ossrc/11/2G3G/APSGSN1
+mz_copy_directory20  = /ossrc/data/pmMediation/eventData/GPEHEvents/dir1
+
+#
+# This section contains name prefixes that will be appended to each generated file before
+# copying them to the CEP and MZ input directories
+#
+[name prefixes]
+
+#
+# This section defines whether to move generated files to the destination folder.
+# If False, then copy is used instead
+#
+[move]
+mz_copy_directory1  = True
+mz_copy_directory2  = True
+mz_copy_directory3  = True
+mz_copy_directory4  = True
+mz_copy_directory5  = True
+mz_copy_directory6  = True
+mz_copy_directory7  = True
+mz_copy_directory8  = True
+mz_copy_directory9  = True
+mz_copy_directory10 = True
+mz_copy_directory11 = True
+mz_copy_directory12 = True
+mz_copy_directory13 = True
+mz_copy_directory14 = True
+mz_copy_directory15 = True
+mz_copy_directory16 = True
+mz_copy_directory17 = True
+mz_copy_directory18 = True
+mz_copy_directory19 = True
+mz_copy_directory20 = True
+

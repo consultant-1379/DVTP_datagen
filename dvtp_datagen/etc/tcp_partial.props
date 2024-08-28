@@ -1,0 +1,146 @@
+#
+# Created on 17 Aug 2012
+#
+# @author: epstvxj
+#
+
+###########################################################
+#  TCP PARTIAL 
+###########################################################
+[tcp partial]
+
+[basic]
+
+# if not specified, default to False
+enable_compression = False
+
+#
+# Start and end time range of files in the master repository
+# Time range should be within 24 hour
+#
+lookup_timerange_start = 201205161600
+lookup_timerange_end   = 201205171600
+
+# tcpta partial master file repository
+input_directory  = /ossrc/UP_MASTER/staple
+
+rop_time_period = 5
+
+# rop time period
+number_of_probes = 4
+
+#
+# Number of RNC traffics that are captured by all PCP devices
+#
+number_of_rncs = 20
+
+#
+# Output directories where all enriched files are stored
+#
+[output_directories]
+output_directory1=/home/epstvxj/Development/Temp/test/UP/PCP1/staple/3G/tcpta_partial
+output_directory2=/home/epstvxj/Development/Temp/test/UP/PCP2/staple/3G/tcpta_partial
+output_directory3=/home/epstvxj/Development/Temp/test/UP/PCP3/staple/3G/tcpta_partial
+output_directory4=/home/epstvxj/Development/Temp/test/UP/PCP4/staple/3G/tcpta_partial
+
+#
+# MCC MNC and LAC values mapped to each RNC
+#
+[rnc_mcc_mnc_lac_map]
+RNC01 = 454_06_1001
+RNC02 = 454_06_8200
+RNC03 = 454_06_1300
+RNC04 = 454_06_8040
+RNC05 = 454_06_8500
+RNC06 = 454_06_8060
+RNC07 = 454_06_1007
+RNC08 = 454_06_8080
+RNC09 = 454_06_8900
+RNC10 = 454_06_8100
+RNC11 = 454_06_8110
+RNC12 = 454_06_1012
+RNC13 = 454_06_8130
+RNC14 = 454_06_8140
+RNC15 = 454_06_8150
+RNC16 = 454_06_8160
+RNC17 = 454_06_8170
+RNC18 = 454_06_8180
+RNC19 = 454_06_1019
+RNC20 = 454_06_1020
+
+;
+; Whether to enrich IMSI for a particular RNC traffic
+; captured by all PCP devices
+;
+[imsi_enrichment_options]
+RNC01 = True
+RNC02 = True
+RNC03 = True
+RNC04 = True
+RNC05 = True
+RNC06 = True
+RNC07 = True
+RNC08 = True
+RNC09 = False
+RNC10 = True
+RNC11 = True
+RNC12 = True
+RNC13 = True
+RNC14 = True
+RNC15 = True
+RNC16 = True
+RNC17 = True
+RNC18 = True
+RNC19 = True
+RNC20 = True
+
+;
+; New IMSI Prefix
+;
+[imsi_options]
+RNC01 = 11101
+RNC02 = 11102
+RNC03 = 11103
+RNC04 = 11104
+RNC05 = 11105
+RNC06 = 11106
+RNC07 = 11107
+RNC08 = 11108
+RNC09 = 45406
+RNC10 = 11110
+RNC11 = 11111
+RNC12 = 11112
+RNC13 = 11113
+RNC14 = 11114
+RNC15 = 11115
+RNC16 = 11116
+RNC17 = 11117
+RNC18 = 11118
+RNC19 = 11119
+RNC20 = 11120
+
+;
+; Whether to enrich DATETIME for a particular RNC traffic
+; captured by all PCP devices
+;
+[datetime_enrichment_options]
+RNC01 = True
+RNC02 = True
+RNC03 = True
+RNC04 = True
+RNC05 = True
+RNC06 = True
+RNC07 = True
+RNC08 = True
+RNC09 = True
+RNC10 = True
+RNC11 = True
+RNC12 = True
+RNC13 = True
+RNC14 = True
+RNC15 = True
+RNC16 = True
+RNC17 = True
+RNC18 = True
+RNC19 = True
+RNC20 = True

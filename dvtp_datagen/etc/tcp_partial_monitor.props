@@ -1,0 +1,83 @@
+###########################################################
+#  Used by the Tcp Partial Generator, 
+#  This configuration is used by scripts to copy
+#  regenerated data into MZ and CEP input directory
+###########################################################
+[tcp_partial_monitor]
+
+[basic]
+rop_time_period = 5
+
+# 
+# This is only used for testing purpose, 
+# should be set to False by default
+#
+ignore_session_time = False
+
+number_of_rncs = 20
+
+#
+# directories where enriched files are stored by the generator
+#
+[generated_file_locations]               
+generated_file_location1 = /ossrc/UP/PCP1/staple/3G/tcpta_partial
+generated_file_location2 = /ossrc/UP/PCP2/staple/3G/tcpta_partial
+generated_file_location3 = /ossrc/UP/PCP3/staple/3G/tcpta_partial
+generated_file_location4 = /ossrc/UP/PCP4/staple/3G/tcpta_partial
+
+#
+# Each generated_file_location<N> section contains a set of destination directories.
+# Those destination directories are input directories of CEP and MZ
+#
+[generated_file_location1]
+cep_copy_directory1=/ossrc/data/pmMediation/eventData/PCPEvents_CEP/PCP1/staple/3G/tcpta_partial
+
+[generated_file_location2]
+cep_copy_directory2=/ossrc/data/pmMediation/eventData/PCPEvents_CEP/PCP2/staple/3G/tcpta_partial
+
+[generated_file_location3]
+cep_copy_directory3=/ossrc/data/pmMediation/eventData/PCPEvents_CEP/PCP3/staple/3G/tcpta_partial
+
+[generated_file_location4]
+cep_copy_directory4=/ossrc/data/pmMediation/eventData/PCPEvents_CEP/PCP4/staple/3G/tcpta_partial
+
+#
+# This section contains name prefixes that will be appended to each generated file before
+# copying them to the CEP and MZ input directories
+#
+[name prefixes]
+
+#
+# This section defines whether to move generated files to the destination folder.
+# If False, then copy is used instead
+#
+[move]
+cep_copy_directory1 = True 
+cep_copy_directory2 = True
+cep_copy_directory3 = True
+cep_copy_directory4 = True
+
+#
+# MCC MNC and LAC values mapped to each RNC
+#
+[rnc_mcc_mnc_lac_map]
+RNC01 = 454_06_1001
+RNC02 = 454_06_8200
+RNC03 = 454_06_1300
+RNC04 = 454_06_8040
+RNC05 = 454_06_8500
+RNC06 = 454_06_8060
+RNC07 = 454_06_1007
+RNC08 = 454_06_8080
+RNC09 = 454_06_8900
+RNC10 = 454_06_8100
+RNC11 = 454_06_8110
+RNC12 = 454_06_1012
+RNC13 = 454_06_8130
+RNC14 = 454_06_8140
+RNC15 = 454_06_8150
+RNC16 = 454_06_8160
+RNC17 = 454_06_8170
+RNC18 = 454_06_8180
+RNC19 = 454_06_1019
+RNC20 = 454_06_1020

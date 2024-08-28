@@ -1,0 +1,119 @@
+###########################################################
+#  Used by the SGEH Generator, 
+#  This configuration is used by scripts to copy
+#  regenerated data into MZ and CEP input directory
+###########################################################
+[mz_sgeh_monitor]
+
+[basic]
+rop_time_period = 1
+
+# 
+# This is only used for testing purpose, 
+# should be set to False by default
+#
+ignore_session_time = False
+
+
+; directory stores all files regenerated/enriched by sgeh workflow
+[generated_file_locations]               
+generated_file_location1  = /ossrc/SGEH/sgsn01
+generated_file_location2  = /ossrc/SGEH/sgsn02
+generated_file_location3  = /ossrc/SGEH/sgsn03
+generated_file_location4  = /ossrc/SGEH/sgsn04
+generated_file_location5  = /ossrc/SGEH/sgsn05
+generated_file_location6  = /ossrc/SGEH/sgsn06
+generated_file_location7  = /ossrc/SGEH/sgsn07
+generated_file_location8  = /ossrc/SGEH/sgsn08
+generated_file_location9  = /ossrc/SGEH/sgsn09
+generated_file_location10 = /ossrc/SGEH/sgsn10
+generated_file_location11 = /ossrc/SGEH/sgsn11
+generated_file_location12 = /ossrc/SGEH/sgsn12
+
+#
+# Each generated_file_location<N> section contains a set of destination directories.
+# Those destination directories are input directories of CEP and MZ
+#
+[generated_file_location1]
+mz_copy_directory1 = /ossrc/data/pmMediation/eventData/sgeh/dir1
+cep_copy_directory1 = /ossrc/data/pmMediation/eventData/SgehEvents_CEP/ManagedElement=SGSN01
+
+[generated_file_location2]
+mz_copy_directory2 = /ossrc/data/pmMediation/eventData/sgeh/dir2
+cep_copy_directory2 = /ossrc/data/pmMediation/eventData/SgehEvents_CEP/ManagedElement=SGSN02
+
+[generated_file_location3]
+mz_copy_directory3 = /ossrc/data/pmMediation/eventData/sgeh/dir3
+cep_copy_directory3 = /ossrc/data/pmMediation/eventData/SgehEvents_CEP/ManagedElement=SGSN03
+
+[generated_file_location4]
+mz_copy_directory4 = /ossrc/data/pmMediation/eventData/sgeh/dir4
+cep_copy_directory4 = /ossrc/data/pmMediation/eventData/SgehEvents_CEP/ManagedElement=SGSN04
+
+[generated_file_location5]
+mz_copy_directory5 = /ossrc/data/pmMediation/eventData/sgeh/dir1
+cep_copy_directory5 = /ossrc/data/pmMediation/eventData/SgehEvents_CEP/ManagedElement=SGSN05
+
+[generated_file_location6]
+mz_copy_directory6 = /ossrc/data/pmMediation/eventData/sgeh/dir2
+cep_copy_directory6 = /ossrc/data/pmMediation/eventData/SgehEvents_CEP/ManagedElement=SGSN06
+
+[generated_file_location7]
+mz_copy_directory7 = /ossrc/data/pmMediation/eventData/sgeh/dir3
+cep_copy_directory7 = /ossrc/data/pmMediation/eventData/SgehEvents_CEP/ManagedElement=SGSN07
+
+[generated_file_location8]
+mz_copy_directory8 = /ossrc/data/pmMediation/eventData/sgeh/dir4
+cep_copy_directory8 = /ossrc/data/pmMediation/eventData/SgehEvents_CEP/ManagedElement=SGSN08
+
+[generated_file_location9]
+mz_copy_directory9 = /ossrc/data/pmMediation/eventData/sgeh/dir1
+cep_copy_directory9 = /ossrc/data/pmMediation/eventData/SgehEvents_CEP/ManagedElement=SGSN09
+
+[generated_file_location10]
+mz_copy_directory10 = /ossrc/data/pmMediation/eventData/sgeh/dir2
+cep_copy_directory10 = /ossrc/data/pmMediation/eventData/SgehEvents_CEP/ManagedElement=SGSN10
+
+[generated_file_location11]
+mz_copy_directory11 = /ossrc/data/pmMediation/eventData/sgeh/dir3
+cep_copy_directory11 = /ossrc/data/pmMediation/eventData/SgehEvents_CEP/ManagedElement=SGSN11
+
+[generated_file_location12]
+mz_copy_directory12 = /ossrc/data/pmMediation/eventData/sgeh/dir4
+cep_copy_directory12 = /ossrc/data/pmMediation/eventData/SgehEvents_CEP/ManagedElement=SGSN12
+
+#
+# This section contains name prefixes that will be appended to each generated file before
+# copying them to the CEP and MZ input directories
+#
+[name prefixes]
+mz_copy_directory1  = SGSN01_
+mz_copy_directory2  = SGSN02_
+mz_copy_directory3  = SGSN03_
+mz_copy_directory4  = SGSN04_
+mz_copy_directory5  = SGSN05_
+mz_copy_directory6  = SGSN06_
+mz_copy_directory7  = SGSN07_
+mz_copy_directory8  = SGSN08_
+mz_copy_directory9  = SGSN09_
+mz_copy_directory10 = SGSN10_
+mz_copy_directory11 = SGSN11_
+mz_copy_directory12 = SGSN12_
+
+#
+# This section defines whether to move generated files to the destination folder.
+# If False, then copy is used instead
+#
+[move]
+cep_copy_directory1  = True 
+cep_copy_directory2  = True
+cep_copy_directory3  = True
+cep_copy_directory4  = True
+cep_copy_directory5  = True 
+cep_copy_directory6  = True
+cep_copy_directory7  = True
+cep_copy_directory8  = True
+cep_copy_directory9  = True 
+cep_copy_directory10 = True
+cep_copy_directory11 = True
+cep_copy_directory12 = True

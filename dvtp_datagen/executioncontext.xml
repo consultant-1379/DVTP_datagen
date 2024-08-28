@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configlist prompt="true">
+	<config name="EC_SB_1">
+		<startclass class="com.digitalroute.picostart.PicoStart" />
+		<jdkarg value="-Xmx2048M" />
+		<jdkarg value="-server" vendor="sun,hp" />
+		<jdkarg value="-Xms2048M" />
+		<classpath path="lib/picostart.jar" />
+		<property name="ec.httpd.password" value="585a3c2a0eae6eb5ebef" />
+		<property name="ec.httpd.port" value="9090" />
+		<property name="ec.httpd.user" value="mzadmin" />
+		<property name="ec.shutdown.time" value="20000" />
+		<property name="ecsa.backlog.dir" value="/eniq/mediation_sw/mediation_gw/tmp" />
+		<property name="pico.bootstrapclass"
+			value=" com.digitalroute.wf.ECEventSender, com.digitalroute.wf.pico.ECSAHTTPD, com.digitalroute.wf.pico.ExecutionContextFactoryImpl, com.digitalroute.wfc.aggregation.storage.AggregationStorageImpl, com.digitalroute.wfc.dupudr2.RDupUDR2StorageImpl, com.digitalroute.wfc.interwf.storagehandler.BatchStorageImpl, com.digitalroute.ui.cmdline.sysinfo.RemoteCommandImpl" />
+		<property name="pico.stderr" value="log/${config.name}.log" />
+		<property name="pico.stdout" value="log/${config.name}.log" />
+		<property name="pico.type" value="ec" />
+		<jdkarg value="-XX:-DontCompileHugeMethods" />
+		<property name="mz.aggregation.max_file_cache_size" value="32000" />
+		<property name="mz.aggregation.min_session_file_size" value="1000000" />
+		<property name="sybase.iq.pool.maxlimit" value="35" />
+		<jdkarg value="-Dcom.sun.management.jmxremote" />
+		<jdkarg value="-Dcom.sun.management.jmxremote.ssl=false" />
+		<jdkarg value="-Dcom.sun.management.jmxremote.authenticate=false" />
+		<jdkarg value="-Dcom.sun.management.jmxremote.port=60000" />
+		<property name="mz.aggregation.storage.profile_session_cache"
+			value="true" />
+		<jdkarg value="-XX:MaxPermSize=256M" />
+		<jdkarg
+			value="-Djava.util.logging.config.file=/eniq/sw/conf/streaming-probe-logging.properties" />
+		<jdkarg value="-Dorg.omg.CORBA.ORBInitialHost=glassfish" />
+		<jdkarg value="-Dorg.omg.CORBA.ORBInitialPort=3700" />
+		<classpath path="./../../glassfish/glassfish/glassfish/lib/gf-client.jar" />
+		<jdkarg
+			value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
+		<jdkarg
+			value="-Dxml-auto.config.file=/eniq/sw/conf/xml-auto-config.properties" />
+		<classpath path="./../../mediation_inter/M_E_LTEES/lib/commons-lang3.jar" />
+		<classpath path="./../../mediation_inter/M_E_LTEES/lib/commons-logging.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/eniq_analysis_base.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/eniq_analysis_ap_event_beans.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/xml-auto-event-dec.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/xml-auto-counter-logic.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/xml-auto-counter-logic-java.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/xml-auto-xml-writer.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/xml-auto-commons.jar" />
+		<classpath path="./../../mediation_inter/M_E_LTEES/lib/log4j.jar" />
+	</config>
+	<config name="EC_SB_2">
+		<startclass class="com.digitalroute.picostart.PicoStart" />
+		<jdkarg value="-Xmx2048M" />
+		<jdkarg value="-server" vendor="sun,hp" />
+		<jdkarg value="-Xms2048M" />
+		<classpath path="lib/picostart.jar" />
+		<property name="ec.httpd.password" value="585a3c2a0eae6eb5ebef" />
+		<property name="ec.httpd.port" value="9091" />
+		<property name="ec.httpd.user" value="mzadmin" />
+		<property name="ec.shutdown.time" value="20000" />
+		<property name="ecsa.backlog.dir" value="/eniq/mediation_sw/mediation_gw/tmp" />
+		<property name="pico.bootstrapclass"
+			value=" com.digitalroute.wf.ECEventSender, com.digitalroute.wf.pico.ECSAHTTPD, com.digitalroute.wf.pico.ExecutionContextFactoryImpl, com.digitalroute.wfc.aggregation.storage.AggregationStorageImpl, com.digitalroute.wfc.dupudr2.RDupUDR2StorageImpl, com.digitalroute.wfc.interwf.storagehandler.BatchStorageImpl, com.digitalroute.ui.cmdline.sysinfo.RemoteCommandImpl" />
+		<property name="pico.stderr" value="log/${config.name}.log" />
+		<property name="pico.stdout" value="log/${config.name}.log" />
+		<property name="pico.type" value="ec" />
+		<jdkarg value="-XX:-DontCompileHugeMethods" />
+		<property name="mz.aggregation.max_file_cache_size" value="32000" />
+		<property name="mz.aggregation.min_session_file_size" value="1000000" />
+		<property name="sybase.iq.pool.maxlimit" value="35" />
+		<jdkarg value="-Dcom.sun.management.jmxremote" />
+		<jdkarg value="-Dcom.sun.management.jmxremote.ssl=false" />
+		<jdkarg value="-Dcom.sun.management.jmxremote.authenticate=false" />
+		<jdkarg value="-Dcom.sun.management.jmxremote.port=60001" />
+		<property name="mz.aggregation.storage.profile_session_cache"
+			value="true" />
+		<jdkarg value="-XX:MaxPermSize=256M" />
+		<jdkarg
+			value="-Djava.util.logging.config.file=/eniq/sw/conf/streaming-probe-logging.properties" />
+		<jdkarg value="-Dorg.omg.CORBA.ORBInitialHost=glassfish" />
+		<jdkarg value="-Dorg.omg.CORBA.ORBInitialPort=3700" />
+		<classpath path="./../../glassfish/glassfish/glassfish/lib/gf-client.jar" />
+		<jdkarg
+			value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
+		<jdkarg
+			value="-Dxml-auto.config.file=/eniq/sw/conf/xml-auto-config.properties" />
+		<classpath path="./../../mediation_inter/M_E_LTEES/lib/commons-lang3.jar" />
+		<classpath path="./../../mediation_inter/M_E_LTEES/lib/commons-logging.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/eniq_analysis_base.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/eniq_analysis_ap_event_beans.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/xml-auto-event-dec.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/xml-auto-counter-logic.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/xml-auto-counter-logic-java.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/xml-auto-xml-writer.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/xml-auto-commons.jar" />
+		<classpath path="./../../mediation_inter/M_E_LTEES/lib/log4j.jar" />
+	</config>
+	<config name="EC_SB_3">
+		<startclass class="com.digitalroute.picostart.PicoStart" />
+		<jdkarg value="-Xmx2048M" />
+		<jdkarg value="-server" vendor="sun,hp" />
+		<jdkarg value="-Xms2048M" />
+		<classpath path="lib/picostart.jar" />
+		<property name="ec.httpd.password" value="585a3c2a0eae6eb5ebef" />
+		<property name="ec.httpd.port" value="9092" />
+		<property name="ec.httpd.user" value="mzadmin" />
+		<property name="ec.shutdown.time" value="20000" />
+		<property name="ecsa.backlog.dir" value="/eniq/mediation_sw/mediation_gw/tmp" />
+		<property name="pico.bootstrapclass"
+			value=" com.digitalroute.wf.ECEventSender, com.digitalroute.wf.pico.ECSAHTTPD, com.digitalroute.wf.pico.ExecutionContextFactoryImpl, com.digitalroute.wfc.aggregation.storage.AggregationStorageImpl, com.digitalroute.wfc.dupudr2.RDupUDR2StorageImpl, com.digitalroute.wfc.interwf.storagehandler.BatchStorageImpl, com.digitalroute.ui.cmdline.sysinfo.RemoteCommandImpl" />
+		<property name="pico.stderr" value="log/${config.name}.log" />
+		<property name="pico.stdout" value="log/${config.name}.log" />
+		<property name="pico.type" value="ec" />
+		<jdkarg value="-XX:-DontCompileHugeMethods" />
+		<property name="mz.aggregation.max_file_cache_size" value="32000" />
+		<property name="mz.aggregation.min_session_file_size" value="1000000" />
+		<property name="sybase.iq.pool.maxlimit" value="35" />
+		<jdkarg value="-Dcom.sun.management.jmxremote" />
+		<jdkarg value="-Dcom.sun.management.jmxremote.ssl=false" />
+		<jdkarg value="-Dcom.sun.management.jmxremote.authenticate=false" />
+		<jdkarg value="-Dcom.sun.management.jmxremote.port=60002" />
+		<property name="mz.aggregation.storage.profile_session_cache"
+			value="true" />
+		<jdkarg value="-XX:MaxPermSize=256M" />
+		<jdkarg
+			value="-Djava.util.logging.config.file=/eniq/sw/conf/streaming-probe-logging.properties" />
+		<jdkarg value="-Dorg.omg.CORBA.ORBInitialHost=glassfish" />
+		<jdkarg value="-Dorg.omg.CORBA.ORBInitialPort=3700" />
+		<classpath path="./../../glassfish/glassfish/glassfish/lib/gf-client.jar" />
+		<jdkarg
+			value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
+		<jdkarg
+			value="-Dxml-auto.config.file=/eniq/sw/conf/xml-auto-config.properties" />
+		<classpath path="./../../mediation_inter/M_E_LTEES/lib/commons-lang3.jar" />
+		<classpath path="./../../mediation_inter/M_E_LTEES/lib/commons-logging.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/eniq_analysis_base.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/eniq_analysis_ap_event_beans.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/xml-auto-event-dec.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/xml-auto-counter-logic.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/xml-auto-counter-logic-java.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/xml-auto-xml-writer.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/xml-auto-commons.jar" />
+		<classpath path="./../../mediation_inter/M_E_LTEES/lib/log4j.jar" />
+	</config>	
+	<config name="EC_SB_4">
+		<startclass class="com.digitalroute.picostart.PicoStart" />
+		<jdkarg value="-Xmx2048M" />
+		<jdkarg value="-server" vendor="sun,hp" />
+		<jdkarg value="-Xms2048M" />
+		<classpath path="lib/picostart.jar" />
+		<property name="ec.httpd.password" value="585a3c2a0eae6eb5ebef" />
+		<property name="ec.httpd.port" value="9093" />
+		<property name="ec.httpd.user" value="mzadmin" />
+		<property name="ec.shutdown.time" value="20000" />
+		<property name="ecsa.backlog.dir" value="/eniq/mediation_sw/mediation_gw/tmp" />
+		<property name="pico.bootstrapclass"
+			value=" com.digitalroute.wf.ECEventSender, com.digitalroute.wf.pico.ECSAHTTPD, com.digitalroute.wf.pico.ExecutionContextFactoryImpl, com.digitalroute.wfc.aggregation.storage.AggregationStorageImpl, com.digitalroute.wfc.dupudr2.RDupUDR2StorageImpl, com.digitalroute.wfc.interwf.storagehandler.BatchStorageImpl, com.digitalroute.ui.cmdline.sysinfo.RemoteCommandImpl" />
+		<property name="pico.stderr" value="log/${config.name}.log" />
+		<property name="pico.stdout" value="log/${config.name}.log" />
+		<property name="pico.type" value="ec" />
+		<jdkarg value="-XX:-DontCompileHugeMethods" />
+		<property name="mz.aggregation.max_file_cache_size" value="32000" />
+		<property name="mz.aggregation.min_session_file_size" value="1000000" />
+		<property name="sybase.iq.pool.maxlimit" value="35" />
+		<jdkarg value="-Dcom.sun.management.jmxremote" />
+		<jdkarg value="-Dcom.sun.management.jmxremote.ssl=false" />
+		<jdkarg value="-Dcom.sun.management.jmxremote.authenticate=false" />
+		<jdkarg value="-Dcom.sun.management.jmxremote.port=60003" />
+		<property name="mz.aggregation.storage.profile_session_cache"
+			value="true" />
+		<jdkarg value="-XX:MaxPermSize=256M" />
+		<jdkarg
+			value="-Djava.util.logging.config.file=/eniq/sw/conf/streaming-probe-logging.properties" />
+		<jdkarg value="-Dorg.omg.CORBA.ORBInitialHost=glassfish" />
+		<jdkarg value="-Dorg.omg.CORBA.ORBInitialPort=3700" />
+		<classpath path="./../../glassfish/glassfish/glassfish/lib/gf-client.jar" />
+		<jdkarg
+			value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
+		<jdkarg
+			value="-Dxml-auto.config.file=/eniq/sw/conf/xml-auto-config.properties" />
+		<classpath path="./../../mediation_inter/M_E_LTEES/lib/commons-lang3.jar" />
+		<classpath path="./../../mediation_inter/M_E_LTEES/lib/commons-logging.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/eniq_analysis_base.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/eniq_analysis_ap_event_beans.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/xml-auto-event-dec.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/xml-auto-counter-logic.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/xml-auto-counter-logic-java.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/xml-auto-xml-writer.jar" />
+		<classpath
+			path="./../../mediation_inter/M_E_LTEES/lib/xml-auto-commons.jar" />
+		<classpath path="./../../mediation_inter/M_E_LTEES/lib/log4j.jar" />
+	</config>	
+</configlist>

@@ -1,0 +1,56 @@
+[loggers]
+keys=root,DatagenFileLogger
+
+[logger_root]
+handlers=err_output
+ 
+[logger_DatagenFileLogger]
+level=DEBUG
+propagate=1
+handlers=external_file
+qualname=DatagenFileLogger
+
+[handlers]
+keys=console,external_file,err_output
+ 
+[formatters]
+keys=console_formatter,file_formatter,err_formatter
+
+#
+# File
+#
+
+[handler_external_file]
+class=logging.handlers.TimedRotatingFileHandler
+formatter=file_formatter
+args=(r'/var/log/dvtp_tool/datagen.log','H',6,7,None, True)
+ 
+[formatter_file_formatter]
+format=%(asctime)-8s, %(threadName)s:%(thread)d, %(processName)s:%(process)d, %(module)s, [%(levelname)-4s] %(message)s
+datefmt=%m-%d %H:%M:%S
+
+#
+# Console 
+#
+
+[handler_console]
+class=logging.StreamHandler
+formatter=console_formatter
+args=(sys.stdout,)
+
+[formatter_console_formatter]
+format=%(asctime)-8s, [%(levelname)-4s] %(message)s
+datefmt=%m-%d %H:%M:%S
+
+#
+# Error
+#
+[handler_err_output]
+level=ERROR
+class=logging.StreamHandler
+formatter=err_formatter
+args=(sys.stdout,)
+
+[formatter_err_formatter]
+format=%(asctime)-8s, %(threadName)s:%(thread)d, %(processName)s:%(process)d, %(module)s, [%(levelname)-4s] %(message)s <Line %(lineno)s in %(module)s>
+datefmt=%m-%d %H:%M:%S

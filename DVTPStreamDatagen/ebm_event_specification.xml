@@ -1,0 +1,1516 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eventspecification xsi:noNamespaceSchemaLocation="./ebm_xml_schema.xsd " xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <general>
+    <docno>1/155 19-AXB 250 12</docno>
+    <revision>C</revision>
+    <date>2013-05-17</date>
+    <author>Noushin Svedberg and Juan Xu and Chengqiong Xie</author>
+    <ffv>5</ffv>
+    <fiv>1</fiv>
+    <revisionhistory>
+      <revisionhistoryelem>
+        <revision>PA3</revision>
+        <comment>
+          2012-04-04, EPG 13A. 
+          2 New events was included: INITIAL and DATA_USAGE. Added new optional parameters to the existing struct PDN_INFO.     
+	</comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>PA11</revision>
+        <comment>
+          2012-05-11, EPG 2013A.
+          Used 3GPP standard: Release 8, 2009-06
+        </comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>B</revision>
+        <comment>
+          2013-01-10, EPG 13A.
+          Used 3GPP standard: Release 9, 2010-10.
+          Updated GTPV2_CAUSE_CODE values.
+          Removed keyword optional from structs within PDN_INFO and UE_INFO.
+          Renamed INITIAL event to SESSION_INFO.
+          Highest possible value for DURATION is 6777215.
+          Update of the description for PDN_ID, TIME_HOUR, TIME_MINUTE, TIME_SECOND, TIME_MILLISECOND and DURATION.     
+	</comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>PC1</revision>
+        <comment>
+          2013-03-27, EPG 13A.
+          Updated the descriptions for the parameters APN, URI-NAME, and RULE_SPACE.     
+        </comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>PC2</revision>
+        <comment>
+          2013-04-04, EPG 2013B.
+          Using 3GPP TS 29.274 Release 10, 2013-03. Updated GTPv2-C Cause values.
+          Changed the ffv and fiv tags to enable use of CPG and EPG in parallel (margin in number series).
+        </comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>PC3</revision>
+        <comment>
+          2013-05-14, EPG 2013B.
+          Added 2 new event SESSION_SUSPENSION and SESSION_RESUME for suspend and resume procedure.
+          Added new SUB_CAUSE_CODE value TEID_UNKNOWN.
+          Added new ORIGINATING_NODE value UNKNOWN.
+        </comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>PC4</revision>
+        <comment>
+          2013-05-17, EPG 13B.
+          Used 3GPP standard: Release 10, 2011-12.
+          Added 2 new event triggers for handover to and from non-3GPP.     
+        </comment>
+      </revisionhistoryelem>
+    </revisionhistory>
+    <Capabilities>
+      <JobPersistence>RESTART</JobPersistence>
+      <EventCapabilities>
+        <OutputFormat>Ericsson_Binary</OutputFormat>
+        <Protocol>STREAM</Protocol>
+        <Compression>NONE</Compression>
+      </EventCapabilities>
+    </Capabilities>
+  </general>
+  <parametertypes>
+    <parametertype>
+      <name>RECORD_LENGTH</name>
+      <type>UINT</type>
+      <description>Total numer of bytes in this binary</description>
+      <numberofbits>16</numberofbits>
+      <range>
+        <low>4</low>
+        <high>65532</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>FILE_FORMAT_VERSION</name>
+      <type>UINT</type>
+      <description>
+        The file format version is incremented if there is a change in the file format which impacts the existing structure of an event - 
+        changes in file structure that requires updates of the controlling XML schema or new parameters added in the middle of an event.
+      </description>
+      <numberofbits>8</numberofbits>
+      <range>
+        <low>1</low>
+        <high>255</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>FILE_INFORMATION_VERSION</name>
+      <type>UINT</type>
+      <description>The file information version is incremented if there is a change in the file information, e.g. new events or new parameters added in the end of the events.</description>
+      <numberofbits>8</numberofbits>
+      <range>
+        <low>1</low>
+        <high>255</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>TIME_YEAR</name>
+      <type>UINT</type>
+      <description>Year</description>
+      <numberofbits>16</numberofbits>
+      <range>
+        <low>1970</low>
+        <high>9999</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>TIME_MONTH</name>
+      <type>UINT</type>
+      <description>Month</description>
+      <numberofbits>8</numberofbits>
+      <range>
+        <low>1</low>
+        <high>12</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>TIME_DAY</name>
+      <type>UINT</type>
+      <description>Year</description>
+      <numberofbits>8</numberofbits>
+      <range>
+        <low>1</low>
+        <high>31</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>TIME_HOUR</name>
+      <type>UINT</type>
+      <description>UTC timestamp (Hour) at the time when the event was triggered (HH)</description>
+      <numberofbits>5</numberofbits>
+      <range>
+        <low>0</low>
+        <high>23</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>TIME_MINUTE</name>
+      <type>UINT</type>
+      <description>UTC timestamp (Minute) at the start of the usage period (MM)</description>
+      <numberofbits>6</numberofbits>
+      <range>
+        <low>0</low>
+        <high>59</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>TIME_SECOND</name>
+      <type>UINT</type>
+      <description>UTC timestamp (Second) at the start of the usage period (SS)</description>
+      <detaileddescription>The second value 60 indicates a leap second.</detaileddescription>
+      <numberofbits>6</numberofbits>
+      <range>
+        <low>0</low>
+        <high>60</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>TIME_MILLISECOND</name>
+      <type>UINT</type>
+      <description>UTC timestamp (MilliSecond) at the start of the usage period (MSS)</description>
+      <numberofbits>10</numberofbits>
+      <range>
+        <low>0</low>
+        <high>999</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>DURATION</name>
+      <type>UINT</type>
+      <description>Duration of the event in milliseconds</description>
+      <detaileddescription>
+        Calculated from when the event procedure starts (i.e. the first request is received/sent) until the event procedure ends (i.e. the first accept or reject response is sent/received).
+        If the duration of the event exceeds 16777215 ms the value of the DURATION parameter will start counting from 0 again.
+      </detaileddescription>
+      <numberofbits>24</numberofbits>
+      <range>
+        <low>0</low>
+        <high>16777215</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>FILE_TERMINATION_CAUSE</name>
+      <type>ENUM</type>
+      <description>Reason for ending the logging</description>
+      <numberofbits>8</numberofbits>
+      <enumeration>
+        <enum internal="TIME" value="0">OK (default)</enum>
+        <enum internal="SIZE" value="1">Max file size exceeded</enum>
+        <enum internal="UNDEFINED" value="2">Other</enum>
+        <enum internal="ROP" value="3">ROP reconfigured</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>RECORD_TYPE</name>
+      <type>ENUM</type>
+      <description>Record type</description>
+      <numberofbits>8</numberofbits>
+      <enumeration>
+        <enum internal="HEADER_RECORD" value="0">Header</enum>
+        <enum internal="EVENT_RECORD" value="1">Event</enum>
+        <enum internal="ERROR_RECORD" value="2">Error</enum>
+        <enum internal="FOOTER_RECORD" value="3">Footer</enum>
+        <enum internal="STREAM_HEADER_RECORD" value="4">Stream Header</enum>
+        <enum internal="STREAM_ERROR_RECORD" value="5">Stream Error</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>EVENT_ID</name>
+      <type>ENUM</type>
+      <description>Event identity</description>
+      <numberofbits>8</numberofbits>
+      <enumeration>
+        <enum internal="SESSION_DELETION" value="0">Session Deletion</enum>
+        <enum internal="BEARER_DELETION" value="1">Dedicated Bearer Deletion</enum>
+        <enum internal="SESSION_CREATION" value="2">Session Creation</enum>
+        <enum internal="BEARER_CREATION" value="3">Dedicated Bearer or 2nd PDP Context Creation</enum>
+        <enum internal="BEARER_MODIFICATION" value="4">Bearer Modification</enum>
+        <enum internal="BEARER_UPDATE" value="5">Bearer Update</enum>
+        <enum internal="SESSION_INFO" value="6">SESSION_INFO</enum>
+        <enum internal="DATA_USAGE" value="7">DATA_USAGE</enum>
+        <enum internal="SESSION_SUSPENSION" value="8">Session Suspension</enum>
+        <enum internal="SESSION_RESUME" value="9">Session Resume</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>RAT</name>
+      <type>ENUM</type>
+      <description>Radio Access Type</description>
+      <numberofbits>2</numberofbits>
+      <enumeration>
+        <enum internal="GSM" value="0">GSM (GERAN)</enum>
+        <enum internal="WCDMA" value="1">WCDMA (UTRAN)</enum>
+        <enum internal="LTE" value="2">LTE (EUTRAN)</enum>
+        <enum internal="CDMA" value="3">CDMA 2000 (eHRPD or HRPD)</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>EVENT_RESULT</name>
+      <type>ENUM</type>
+      <description>Result of the Event Procedure</description>
+      <numberofbits>2</numberofbits>
+      <enumeration>
+        <enum internal="SUCCESS" value="0">Success</enum>
+        <enum internal="REJECT" value="1">Reject</enum>
+        <enum internal="ABORT" value="2">Abort</enum>
+        <enum internal="IGNORE" value="3">Ignore</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>CAUSE_PROTOCOL</name>
+      <type>ENUM</type>
+      <description>This information element indicates from which protocol the cause code originates</description>
+      <detaileddescription>Only GPTV2 and INTERNAL are used in the current release. INTERNAL causes codes are used when no external signalling is involved.</detaileddescription>
+      <numberofbits>3</numberofbits>
+      <enumeration>
+        <enum internal="INTERNAL" value="0">INTERNAL</enum>
+        <enum internal="GTPV1" value="1">GTPV1</enum>
+        <enum internal="GTPV2" value="2">GTPV2</enum>
+        <enum internal="PMIPV6" value="3">PMIPV6</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>CAUSE_CODE</name>
+      <type>UINT</type>
+      <description>This information element provides information about the reason for acceptance or rejection of an operation.  In order to get the protocol from where the Cause Code in an event originates, the parameter "CAUSE_PROTOCOL" value should be analyzed.</description>
+      <numberofbits>10</numberofbits>
+      <range>
+        <low>0</low>
+        <high>1023</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_ID</name>
+      <type>UINT</type>
+      <description>The EPS Bearer ID identifies one of several bearers in a bearer list</description>
+      <detaileddescription>Defined in TS 24.007, chapter 11.2.3.1.5. Used values are 0, 5-15.</detaileddescription>
+      <numberofbits>4</numberofbits>
+      <range>
+        <low>0</low>
+        <high>15</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_QCI</name>
+      <type>UINT</type>
+      <description>Provides information on a QoS class identifier for each bearer in a bearer setup list</description>
+      <detaileddescription>Defined in TS 29.274, chapter 8.15 and TS 36.413, chapter 9.2.1.15.</detaileddescription>
+      <numberofbits>8</numberofbits>
+      <range>
+        <low>0</low>
+        <high>255</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>ARP_PRIORITY_LEVEL</name>
+      <type>UINT</type>
+      <description>Provides information on Priority Level of Allocation and Retention Priority for each bearer.</description>
+      <detaileddescription>Defined in TS 29.274, chapter 8.15 and TS 29.212, chapter 5.3.45.</detaileddescription>
+      <numberofbits>4</numberofbits>
+      <range>
+        <low>1</low>
+        <high>15</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>ARP_PCI</name>
+      <type>ENUM</type>
+      <description>Provides information on Pre-emption-Capability of Allocation and Retention Priority for each bearer.</description>
+      <detaileddescription>Defined in TS 29.274, chapter 8.15 and TS 29.212, chapter 5.3.46.</detaileddescription>
+      <numberofbits>1</numberofbits>
+      <enumeration>
+        <enum internal="ENABLED" value="0">Pre-emption-Capability enabled</enum>
+        <enum internal="DISABLED" value="1">Pre-emption-Capability disabled</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>ARP_PVI</name>
+      <type>ENUM</type>
+      <description>Provides information on Pre-emption-Vulnerability of Allocation and Retention Priority for each bearer.</description>
+      <detaileddescription>Defined in TS 29.274, chapter 8.15 and TS 29.212, chapter 5.3.47.</detaileddescription>
+      <numberofbits>1</numberofbits>
+      <enumeration>
+        <enum internal="ENABLED" value="0">Pre-emption-Vulnerability enabled</enum>
+        <enum internal="DISABLED" value="1">Pre-emption-Vulnerability disabled</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_MBR_UL</name>
+      <type>UINT</type>
+      <description>Provides Maximum Bit Rate (kbps) in uplink direction for a GBR bearer</description>
+      <detaileddescription>Defined in TS 29.274, chapter 8.15 and TS 36.413, chapter 9.2.1.18-19.</detaileddescription>
+      <numberofbits>24</numberofbits>
+      <range>
+        <low>0</low>
+        <high>10000000</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_MBR_DL</name>
+      <type>UINT</type>
+      <description>Provides Maximum Bit Rate (kbps) in downlink direction for a GBR bearer</description>
+      <detaileddescription>Defined in TS 29.274, chapter 8.15 and TS 36.413, chapter 9.2.1.18-19.</detaileddescription>
+      <numberofbits>24</numberofbits>
+      <range>
+        <low>0</low>
+        <high>10000000</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_GBR_UL</name>
+      <type>UINT</type>
+      <description>Provides Guaranteed Bit Rate (kbps) in uplink direction for a GBR bearer</description>
+      <detaileddescription>Defined in TS 29.274, chapter 8.15 and TS 36.413, chapter 9.2.1.18-19.</detaileddescription>
+      <numberofbits>24</numberofbits>
+      <range>
+        <low>0</low>
+        <high>10000000</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_GBR_DL</name>
+      <type>UINT</type>
+      <description>Provides Guaranteed Bit Rate (kbps) in downlink direction for a GBR bearer</description>
+      <detaileddescription>Defined in TS 29.274, chapter 8.15 and TS 36.413, chapter 9.2.1.18-19.</detaileddescription>
+      <numberofbits>24</numberofbits>
+      <range>
+        <low>0</low>
+        <high>10000000</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_CAUSE</name>
+      <type>UINT</type>
+      <description>Indicates for each bearer in a bearer  list whether the bearer handling was successful, and if not, gives information on the reason.</description>
+      <detaileddescription>A subset of the values defined in TS 29.274, table 8.4-1.</detaileddescription>
+      <numberofbits>10</numberofbits>
+      <range>
+        <low>0</low>
+        <high>1023</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_SENT_DL_PACKETS</name>
+      <type>UINT</type>
+      <description>Indicates how many packets that have been sent by the SGW in downlink direction for the bearer.</description>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_SENT_DL_BYTES</name>
+      <type>UINT</type>
+      <description>Indicates how many bytes that have been sent by the SGW in downlink direction for the bearer.</description>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_RCVD_UL_PACKETS</name>
+      <type>UINT</type>
+      <description>Indicates how many packets that have been received by the SGW in uplink direction for the bearer.</description>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_RCVD_UL_BYTES</name>
+      <type>UINT</type>
+      <description>Indicates how many bytes that have been received by the SGW in uplink direction for the bearer.</description>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_DROPPED_DL_PACKETS</name>
+      <type>UINT</type>
+      <description>Indicates how many packets in downlink direction that have been lost for the bearer.</description>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_DROPPED_UL_PACKETS</name>
+      <type>UINT</type>
+      <description>Indicates how many packets in uplink direction that have been lost for the bearer.</description>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>MCC</name>
+      <type>IBCD</type>
+      <description>Mobile Country Code. The MCC identifies uniquely the country of domicile of the mobile subscriber</description>
+      <detaileddescription>
+        Defined in TS 24.008, chapter 10.5.1.4. Format is an integer in BCD format: HEX #{mcc1}{mcc2}{mcc3} , 
+        where each {mccX} is a 4 bit BCD digit (0-9).
+        #000 = no valid parameter value available
+      </detaileddescription>
+      <numberofbits>12</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>MNC</name>
+      <type>IBCD</type>
+      <description>Mobile Network Code. The MNC identifies the home PLMN of the mobile subscriber.</description>
+      <detaileddescription>
+        Defined in TS 24.008, chapter 10.5.1.4. Format is an integer in BCD format: HEX #{mnc1}{mnc2}{mnc3} , 
+        where each {mncX} is a 4 bit BCD digit (0-9). F is used as filler digit, e.g. MNC =12 results in HEX#F12
+        #000 = no valid paramter value available
+      </detaileddescription>
+      <numberofbits>12</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>IMSI</name>
+      <type>TBCD</type>
+      <description>International Mobile Subscriber Identity. This information element contains information which is commonly used to identify the UE in the CN.</description>
+      <detaileddescription>
+        Defined in TS 23.003 chapter 2.2 for the composition, and TS 29.274 chapter 8.3 for the coding.
+        5-15 digits, TBCD (Telephony Binary Coded Decimal), each digit represented by 4 bits. 
+        Padded with '1111' for each unused digit up to a total length of 8 octets/16 digits
+      </detaileddescription>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>IMSI_VALIDATION</name>
+      <type>ENUM</type>
+      <description>Indicates whether the IMSI is authenticated or not.</description>
+      <detaileddescription>Defined in TS 29.274, chapter 8.12</detaileddescription>
+      <numberofbits>1</numberofbits>
+      <enumeration>
+        <enum internal="AUTHENTICATED" value="0">IMSI is authenticated</enum>
+        <enum internal="UNAUTHENTICATED" value="1">IMSI is not autehenticated</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>IMEISV</name>
+      <type>TBCD</type>
+      <description>International Mobile Equipment Identity Software Version</description>
+      <detaileddescription>
+        Defined in TS 23.003 chapter 6.2 and chapter B1. Encoded according to TS 29.060 chapter 7.7.53. 
+        Three sets of digits; 8, 6, and 2 digits respectively. TBCD (Telephony Binary Coded Decimal), each digit represented by 4 bits. 
+        Padded with '1111' for each unused digit up to a total length of 8 octets/16 digits
+      </detaileddescription>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>APN</name>
+      <type>DNSNAME</type>
+      <description>Access Point Name. For the PGW events only the APN Network Identifier part of the APN name is included.</description>
+      <detaileddescription>
+        Defined in TS 23.003 chapter 9.1. Up to 100 octets. 
+        1st octet contains length, next-coming octets contain ASCII characters, and so forth. E.g. ab.dce.fg becomes 2ab3dce2fg
+        The APN parameter is byte-aligned and it is preceded by a length-field.
+      </detaileddescription>
+      <lengthbits>7</lengthbits>
+      <validlength>
+        <low>1</low>
+        <high>100</high>
+      </validlength>
+    </parametertype>
+    <parametertype>
+      <name>APN_AMBR_UL</name>
+      <type>UINT</type>
+      <description>Aggregate Maximum Bit Rate (kbps) in uplink direction</description>
+      <detaileddescription>Defined in TS 29.274, chapter 8.7 and TS 24.301, chapter 9.9.4.2.</detaileddescription>
+      <numberofbits>32</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>APN_AMBR_DL</name>
+      <type>UINT</type>
+      <description>Aggregate Maximum Bit Rate (kbps) in downlink direction</description>
+      <detaileddescription>Defined in TS 29.274, chapter 8.7 and TS 24.301, chapter 9.9.4.2.</detaileddescription>
+      <numberofbits>32</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>IPV4</name>
+      <type>IPADDRESS</type>
+      <description>IPv4 address</description>
+      <detaileddescription>Defined in TS 29.274 chapter 8.22, TS 23.003 chapter 5. Consists of  4 octets</detaileddescription>
+      <numberofbits>32</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>IPV6</name>
+      <type>IPADDRESSV6</type>
+      <description>IPv6 address</description>
+      <detaileddescription>Defined in TS 29.274 chapter 8.22, TS 23.003 chapter 5. Consists of 16 octets</detaileddescription>
+      <numberofbits>128</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>TAC</name>
+      <type>UINT</type>
+      <description>Tracking Area Code. This element is used to uniquely identify a Tracking Area Code.</description>
+      <detaileddescription>Defined in TS 29.274 chapter 8.21.4</detaileddescription>
+      <numberofbits>16</numberofbits>
+      <range>
+        <low>0</low>
+        <high>65535</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>ECI</name>
+      <type>UINT</type>
+      <description>E-UTRAN Cell Identity. Used to identify cells within a PLMN.</description>
+      <detaileddescription>Defined in TS 29.274 chapter 8.21.5</detaileddescription>
+      <numberofbits>28</numberofbits>
+      <range>
+        <low>0</low>
+        <high>268435455</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>LAC</name>
+      <type>UINT</type>
+      <description>Location Area Code</description>
+      <detaileddescription>Defined in TS 29.274 chapter 8.21.1-3</detaileddescription>
+      <numberofbits>16</numberofbits>
+      <range>
+        <low>0</low>
+        <high>65535</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>RAC</name>
+      <type>UINT</type>
+      <description>Routing Area Code</description>
+      <detaileddescription>Defined in TS 29.274 chapter 8.21.3</detaileddescription>
+      <numberofbits>8</numberofbits>
+      <range>
+        <low>0</low>
+        <high>255</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>CI</name>
+      <type>UINT</type>
+      <description>Cell Identity</description>
+      <detaileddescription>Defined in TS 29.274 chapter 8.21.1</detaileddescription>
+      <numberofbits>16</numberofbits>
+      <range>
+        <low>0</low>
+        <high>65535</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>SAC</name>
+      <type>UINT</type>
+      <description>Service Area Code</description>
+      <detaileddescription>Defined in TS 29.274 chapter 8.21.2</detaileddescription>
+      <numberofbits>16</numberofbits>
+      <range>
+        <low>0</low>
+        <high>65535</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>EVENT_TRIGGER</name>
+      <type>ENUM</type>
+      <description>Indicates the reason why the event was triggered.</description>
+      <numberofbits>8</numberofbits>
+      <range>
+        <low>0</low>
+        <high>255</high>
+      </range>
+      <enumeration>
+        <enum internal="NO_INFORMATION" value="0">No information</enum>
+        <enum internal="CREATE_NEW_PDN_CONNECTION" value="1">Create new PDN connection</enum>
+        <enum internal="DELETE_PDN_CONNECTION" value="2">Delete PDN connection</enum>
+        <enum internal="BEARER_ACTIVATION" value="3">Bearer activation</enum>
+        <enum internal="BEARER_DEACTIVATION" value="4">Bearer deactivation</enum>
+        <enum internal="PGW_INITIATED_BEARER_MODIFICATION" value="5">PGW initiated bearer modification</enum>
+        <enum internal="MOBILITY_OR_SERVICE_REQUEST" value="6">Mobility or Service request</enum>
+        <enum internal="MOBILITY_WITH_SGW_CHANGE" value="7">Mobility with SGW change</enum>
+        <enum internal="EVENT_TRIGGERED_INTERNALLY" value="8">Event triggered internally</enum>
+	<enum internal="CS_FALLBACK_OR_SRVCC" value="9">CS fallback or SRVCC</enum>
+        <enum internal="HANDOVER_TO_NON_3GPP" value="10">Handover to non-3GPP</enum>
+        <enum internal="HANDOVER_FROM_NON_3GPP" value="11">Handover from non-3GPP</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>ORIGINATING_NODE</name>
+      <type>ENUM</type>
+      <description>The value represents the node type that initiated the event.</description>
+      <detaileddescription>SELF is used for events initiated by the node itself.</detaileddescription>
+      <numberofbits>4</numberofbits>
+      <enumeration>
+        <enum internal="SELF" value="0">SELF</enum>
+        <enum internal="SGW" value="1">SGW</enum>
+        <enum internal="PGW" value="2">PGW</enum>
+        <enum internal="MME" value="3">MME</enum>
+        <enum internal="S4_SGSN" value="4">S4_SGSN</enum>
+        <enum internal="GN_SGSN" value="5">GN_SGSN</enum>
+        <enum internal="UNKNOWN" value="6">UNKNOWN</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>BYTE_HOUR</name>
+      <type>UINT</type>
+      <description>UTC Timestamp, Hour. HH</description>
+      <numberofbits>8</numberofbits>
+      <range>
+        <low>0</low>
+        <high>23</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>BYTE_MINUTE</name>
+      <type>UINT</type>
+      <description>UTC Timestamp, Minute. MM</description>
+      <numberofbits>8</numberofbits>
+      <range>
+        <low>0</low>
+        <high>59</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>BYTE_SECOND</name>
+      <type>UINT</type>
+      <description>UTC Timestamp, Second. SS</description>
+      <detaileddescription>The second value 60 indicates a leap second.</detaileddescription>
+      <numberofbits>8</numberofbits>
+      <range>
+        <low>0</low>
+        <high>60</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>BYTE_UTC_SIGN</name>
+      <type>UINT</type>
+      <description>UTC sign. 0 represents +, and 1 represents - </description>
+      <numberofbits>8</numberofbits>
+      <range>
+        <low>0</low>
+        <high>1</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>ERROR_TYPE</name>
+      <type>ENUM</type>
+      <description>Error type</description>
+      <numberofbits>8</numberofbits>
+      <enumeration>
+        <enum internal="OTHER" value="0">Other error</enum>
+        <enum internal="CONN_COM_ERR" value="1">Connection failed</enum>
+        <enum internal="CONGESTION" value="2">Connection congested</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>CAUSE_OF_HEADER</name>
+      <type>ENUM</type>
+      <description>Reason why a header record is sent in the stream</description>
+      <numberofbits>8</numberofbits>
+      <enumeration>
+        <enum internal="STREAM_ENABLED" value="0">Stream enabled</enum>
+        <enum internal="STREAM_RESTART_AFTER_COMM_FAILURE" value="1">Stream restart after communication failure</enum>
+        <enum internal="STREAM_RESTART_AFTER_RE_CONFIG" value="2">Stream restart after reconfiguration</enum>
+        <enum internal="LOCAL_TIME_CHANGE" value="3">Local time changed</enum>
+        <enum internal="OTHER" value="4">Other reason</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>NODE_ID</name>
+      <type>BYTEARRAY</type>
+      <description>Node Identity, defined as an ASCII string.</description>
+      <detaileddescription>The parameter is byte-aligned and it is preceded by a length-field.</detaileddescription>
+      <lengthbits>8</lengthbits>
+      <validlength>
+        <low>0</low>
+        <high>20</high>
+      </validlength>
+    </parametertype>
+    <parametertype>
+      <name>NUMBER_OF_DROPPED_EVENTS</name>
+      <type>UINT</type>
+      <description>Indicates how many events that have been lost during a period of streaming error.</description>
+      <numberofbits>32</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>INTERNAL_CAUSE_CODE</name>
+      <type>ENUM</type>
+      <description>This information element provides information about the result of an internally triggered operation. Used when "CAUSE_PROTOCOL" value is set to "INTERNAL".</description>
+      <numberofbits>10</numberofbits>
+      <range>
+        <low>0</low>
+        <high>1023</high>
+      </range>
+      <enumeration>
+        <enum internal="SUCCESS" value="0">Successful operation</enum>
+        <enum internal="FAILURE" value="1">The operation failed.</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>GTPV2_CAUSE_CODE</name>
+      <type>ENUM</type>
+      <description>This information element provides information about the reason for acceptance or rejection of a request message. Used when CAUSE_PROTOCOL value is set to GTPV2.</description>
+      <detaileddescription>Defined in TS 29.274 table 8.4-1.</detaileddescription>
+      <numberofbits>10</numberofbits>
+      <range>
+        <low>0</low>
+        <high>1023</high>
+      </range>
+      <enumeration>
+        <enum internal="RESERVED_0" value="0">Reserved</enum>
+        <enum internal="RESERVED_1" value="1">Reserved</enum>
+        <enum internal="LOCAL_DETACH" value="2">Local Detach</enum>
+        <enum internal="COMPLETE_DETACH" value="3">Complete Detach</enum>
+        <enum internal="RAT_CHANGED_FROM_3GPP_TO_NON_3GPP" value="4">RAT changed from 3GPP to Non-3GPP</enum>
+        <enum internal="ISR_DEACTIVATION" value="5">ISR deactivation</enum>
+        <enum internal="ERROR_INDICATION_IS_RECEIVED_FROM_RNC_ENODEB_S4_SGSN" value="6">Error Indication is received from RNC, eNodeB, or S4-SGSN</enum>
+        <enum internal="IMSI_DETACH_ONLY" value="7">IMSI Detach Only</enum>
+        <enum internal="REACTIVATION_REQUESTED" value="8">Reactivation requested</enum>
+        <enum internal="PDN_RECONNECTION_TO_THIS_APN_DISALLOWED" value="9">PDN reconnection to this APN disallowed</enum>
+        <enum internal="ACCESS_CHANGED_FROM_NON_3GPP_TO_3GPP" value="10">Access changed from non-3GPP to 3GPP</enum>
+        <enum internal="PDN_CONNECTION_INACTIVITY_TIMER_EXPIRES" value="11">PDN connection inactivity timer expires</enum>
+        <enum internal="SPARE_12" value="12">Spare</enum>
+        <enum internal="SPARE_13" value="13">Spare</enum>
+        <enum internal="SPARE_14" value="14">Spare</enum>
+        <enum internal="SPARE_15" value="15">Spare</enum>
+        <enum internal="REQUEST_ACCEPTED" value="16">Request accepted</enum>
+        <enum internal="REQUEST_ACCEPTED_PARTIALLY" value="17">Request accepted partially</enum>
+        <enum internal="NEW_PDN_TYPE_DUE_TO_NETWORK_PREFERENCE" value="18">New PDN type due to network preference</enum>
+        <enum internal="NEW_PDN_TYPE_DUE_TO_SINGLE_ADDRESS_BEARER_ONLY" value="19">New PDN type due to single address bearer only</enum>
+        <enum internal="SPARE_20" value="20">Spare</enum>
+        <enum internal="SPARE_21" value="21">Spare</enum>
+        <enum internal="SPARE_22" value="22">Spare</enum>
+        <enum internal="SPARE_23" value="23">Spare</enum>
+        <enum internal="SPARE_24" value="24">Spare</enum>
+        <enum internal="SPARE_25" value="25">Spare</enum>
+        <enum internal="SPARE_26" value="26">Spare</enum>
+        <enum internal="SPARE_27" value="27">Spare</enum>
+        <enum internal="SPARE_28" value="28">Spare</enum>
+        <enum internal="SPARE_29" value="29">Spare</enum>
+        <enum internal="SPARE_30" value="30">Spare</enum>
+        <enum internal="SPARE_31" value="31">Spare</enum>
+        <enum internal="SPARE_32" value="32">Spare</enum>
+        <enum internal="SPARE_33" value="33">Spare</enum>
+        <enum internal="SPARE_34" value="34">Spare</enum>
+        <enum internal="SPARE_35" value="35">Spare</enum>
+        <enum internal="SPARE_36" value="36">Spare</enum>
+        <enum internal="SPARE_37" value="37">Spare</enum>
+        <enum internal="SPARE_38" value="38">Spare</enum>
+        <enum internal="SPARE_39" value="39">Spare</enum>
+        <enum internal="SPARE_40" value="40">Spare</enum>
+        <enum internal="SPARE_41" value="41">Spare</enum>
+        <enum internal="SPARE_42" value="42">Spare</enum>
+        <enum internal="SPARE_43" value="43">Spare</enum>
+        <enum internal="SPARE_44" value="44">Spare</enum>
+        <enum internal="SPARE_45" value="45">Spare</enum>
+        <enum internal="SPARE_46" value="46">Spare</enum>
+        <enum internal="SPARE_47" value="47">Spare</enum>
+        <enum internal="SPARE_48" value="48">Spare</enum>
+        <enum internal="SPARE_49" value="49">Spare</enum>
+        <enum internal="SPARE_50" value="50">Spare</enum>
+        <enum internal="SPARE_51" value="51">Spare</enum>
+        <enum internal="SPARE_52" value="52">Spare</enum>
+        <enum internal="SPARE_53" value="53">Spare</enum>
+        <enum internal="SPARE_54" value="54">Spare</enum>
+        <enum internal="SPARE_55" value="55">Spare</enum>
+        <enum internal="SPARE_56" value="56">Spare</enum>
+        <enum internal="SPARE_57" value="57">Spare</enum>
+        <enum internal="SPARE_58" value="58">Spare</enum>
+        <enum internal="SPARE_59" value="59">Spare</enum>
+        <enum internal="SPARE_60" value="60">Spare</enum>
+        <enum internal="SPARE_61" value="61">Spare</enum>
+        <enum internal="SPARE_62" value="62">Spare</enum>
+        <enum internal="SPARE_63" value="63">Spare</enum>
+        <enum internal="CONTEXT_NOT_FOUND" value="64">Context Not Found</enum>
+        <enum internal="INVALID_MESSAGE_FORMAT" value="65">Invalid Message Format</enum>
+        <enum internal="VERSION_NOT_SUPPORTED_BY_NEXT_PEER" value="66">Version not supported by next peer</enum>
+        <enum internal="INVALID_LENGTH" value="67">Invalid length</enum>
+        <enum internal="SERVICE_NOT_SUPPORTED" value="68">Service not supported</enum>
+        <enum internal="MANDATORY_IE_INCORRECT" value="69">Mandatory IE incorrect</enum>
+        <enum internal="MANDATORY_IE_MISSING" value="70">Mandatory IE missing</enum>
+        <enum internal="SPARE_71" value="71">Spare</enum>
+        <enum internal="SYSTEM_FAILURE" value="72">System failure</enum>
+        <enum internal="NO_RESOURCES_AVAILABLE" value="73">No resources available</enum>
+        <enum internal="SEMANTIC_ERROR_IN_THE_TFT_OPERATION" value="74">Semantic error in the TFT operation</enum>
+        <enum internal="SYNTACTIC_ERROR_IN_THE_TFT_OPERATION" value="75">Syntactic error in the TFT operation</enum>
+        <enum internal="SEMANTIC_ERRORS_IN_PACKET_FILTER" value="76">Semantic errors in packet filter(s)</enum>
+        <enum internal="SYNTACTIC_ERRORS_IN_PACKET_FILTER" value="77">Syntactic errors in packet filter(s)</enum>
+        <enum internal="MISSING_OR_UNKNOWN_APN" value="78">Missing or unknown APN</enum>
+        <enum internal="SPARE_79" value="79">Spare</enum>
+        <enum internal="GRE_KEY_NOT_FOUND" value="80">GRE key not found</enum>
+        <enum internal="RELOCATION_FAILURE" value="81">Relocation failure</enum>
+        <enum internal="DENIED_IN_RAT" value="82">Denied in RAT</enum>
+        <enum internal="PREFERRED_PDN_TYPE_NOT_SUPPORTED" value="83">Preferred PDN type not supported</enum>
+        <enum internal="ALL_DYNAMIC_ADDRESSES_ARE_OCCUPIED" value="84">All dynamic addresses are occupied</enum>
+        <enum internal="UE_CONTEXT_WITHOUT_TFT_ALREADY_ACTIVATED" value="85">UE context without TFT already activated</enum>
+        <enum internal="PROTOCOL_TYPE_NOT_SUPPORTED" value="86">Protocol type not supported</enum>
+        <enum internal="UE_NOT_RESPONDING" value="87">UE not responding</enum>
+        <enum internal="UE_REFUSES" value="88">UE refuses</enum>
+        <enum internal="SERVICE_DENIED" value="89">Service denied</enum>
+        <enum internal="UNABLE_TO_PAGE_UE" value="90">Unable to page UE</enum>
+        <enum internal="NO_MEMORY_AVAILABLE" value="91">No memory available</enum>
+        <enum internal="USER_AUTHENTICATION_FAILED" value="92">User authentication failed</enum>
+        <enum internal="APN_ACCESS_DENIED_NO_SUBSCRIPTION" value="93">APN access denied due to no subscription</enum>
+        <enum internal="REQUEST_REJECTED" value="94">Request rejected</enum>
+        <enum internal="P_TMSI_SIGNATURE_MISMATCH" value="95">P-TMSI Signature mismatch</enum>
+        <enum internal="IMSI_IMEI_NOT_KNOWN" value="96">IMSI or IMEI not known</enum>
+        <enum internal="SEMANTIC_ERROR_IN_THE_TAD_OPERATION" value="97">Semantic error in the TAD operation</enum>
+        <enum internal="SYNTACTIC_ERROR_IN_THE_TAD_OPERATION" value="98">Syntactic error in the TAD operation</enum>
+        <enum internal="SPARE_99" value="99">Spare</enum>
+        <enum internal="REMOTE_PEER_NOT_RESPONDING" value="100">Remote peer not responding</enum>
+        <enum internal="COLLISION_WITH_NETWORK_INITIATED_REQUEST" value="101">Collision with network initiated request</enum>
+        <enum internal="UNABLE_TO_PAGE_UE_DUE_TO_SUSPENSION" value="102">Unable to page UE due to Suspension</enum>
+        <enum internal="CONDITIONAL_IE_MISSING" value="103">Conditional IE missing</enum>
+        <enum internal="APN_RESTRICTION_TYPE_INCOMPATIBLE_WITH_CURRENTLY_ACTIVE_PDN_CONNECTION" value="104">APN Restriction type Incompatible with currently active PDN connection</enum>
+        <enum internal="INVALID_LENGTH_OF_TRIGGERED_RESPONSE_MESSAGE_AND_PIGGYBACKED_INITIAL_MESSAGE" value="105">Invalid overall length of the triggered response message and a piggybacked initial message</enum>
+        <enum internal="DATA_FORWARDING_NOT_SUPPORTED" value="106">Data forwarding not supported</enum>
+        <enum internal="INVALID_REPLY_FROM_REMOTE_PEER" value="107">Invalid reply from remote peer</enum>
+        <enum internal="FALLBACK_TO_GTPV1" value="108">Fallback to GTPv1</enum>
+        <enum internal="INVALID_PEER" value="109">Invalid peer</enum>
+        <enum internal="TEMPORARILY_REJECTED_DUE_TO_HANDOVER_PROCEDURE_IN_PROGRESS" value="110">Temporarily rejected due to handover procedure in progress</enum>
+        <enum internal="MODIFICATIONS_NOT_LIMITED_TO_S1_U_BEARERS" value="111">Modifications not limited to S1-U bearers</enum>
+        <enum internal="REQUEST_REJECTED_FOR_A_PMIPV6_REASON" value="112">Request rejected for a PMIPv6 reason</enum>
+        <enum internal="APN_CONGESTION" value="113">APN congestion</enum>
+        <enum internal="BEARER_HANDLING_NOT_SUPPORTED" value="114">Bearer handling not supported</enum>
+        <enum internal="UE_ALREADY_REATTACHED" value="115">UE already reattached</enum>
+        <enum internal="MULTIPLE_PDN_CONNECTIONS_FOR_A_GIVEN_APN_NOT_ALLOWED" value="116">Multiple PDN connections for a given APN not allowed</enum>
+        <enum internal="SPARE_117" value="117">Spare</enum>
+        <enum internal="SPARE_118" value="118">Spare</enum>
+        <enum internal="SPARE_119" value="119">Spare</enum>
+        <enum internal="SPARE_120" value="120">Spare</enum>
+        <enum internal="SPARE_121" value="121">Spare</enum>
+        <enum internal="SPARE_122" value="122">Spare</enum>
+        <enum internal="SPARE_123" value="123">Spare</enum>
+        <enum internal="SPARE_124" value="124">Spare</enum>
+        <enum internal="SPARE_125" value="125">Spare</enum>
+        <enum internal="SPARE_126" value="126">Spare</enum>
+        <enum internal="SPARE_127" value="127">Spare</enum>
+        <enum internal="SPARE_128" value="128">Spare</enum>
+        <enum internal="SPARE_129" value="129">Spare</enum>
+        <enum internal="SPARE_130" value="130">Spare</enum>
+        <enum internal="SPARE_131" value="131">Spare</enum>
+        <enum internal="SPARE_132" value="132">Spare</enum>
+        <enum internal="SPARE_133" value="133">Spare</enum>
+        <enum internal="SPARE_134" value="134">Spare</enum>
+        <enum internal="SPARE_135" value="135">Spare</enum>
+        <enum internal="SPARE_136" value="136">Spare</enum>
+        <enum internal="SPARE_137" value="137">Spare</enum>
+        <enum internal="SPARE_138" value="138">Spare</enum>
+        <enum internal="SPARE_139" value="139">Spare</enum>
+        <enum internal="SPARE_140" value="140">Spare</enum>
+        <enum internal="SPARE_141" value="141">Spare</enum>
+        <enum internal="SPARE_142" value="142">Spare</enum>
+        <enum internal="SPARE_143" value="143">Spare</enum>
+        <enum internal="SPARE_144" value="144">Spare</enum>
+        <enum internal="SPARE_145" value="145">Spare</enum>
+        <enum internal="SPARE_146" value="146">Spare</enum>
+        <enum internal="SPARE_147" value="147">Spare</enum>
+        <enum internal="SPARE_148" value="148">Spare</enum>
+        <enum internal="SPARE_149" value="149">Spare</enum>
+        <enum internal="SPARE_150" value="150">Spare</enum>
+        <enum internal="SPARE_151" value="151">Spare</enum>
+        <enum internal="SPARE_152" value="152">Spare</enum>
+        <enum internal="SPARE_153" value="153">Spare</enum>
+        <enum internal="SPARE_154" value="154">Spare</enum>
+        <enum internal="SPARE_155" value="155">Spare</enum>
+        <enum internal="SPARE_156" value="156">Spare</enum>
+        <enum internal="SPARE_157" value="157">Spare</enum>
+        <enum internal="SPARE_158" value="158">Spare</enum>
+        <enum internal="SPARE_159" value="159">Spare</enum>
+        <enum internal="SPARE_160" value="160">Spare</enum>
+        <enum internal="SPARE_161" value="161">Spare</enum>
+        <enum internal="SPARE_162" value="162">Spare</enum>
+        <enum internal="SPARE_163" value="163">Spare</enum>
+        <enum internal="SPARE_164" value="164">Spare</enum>
+        <enum internal="SPARE_165" value="165">Spare</enum>
+        <enum internal="SPARE_166" value="166">Spare</enum>
+        <enum internal="SPARE_167" value="167">Spare</enum>
+        <enum internal="SPARE_168" value="168">Spare</enum>
+        <enum internal="SPARE_169" value="169">Spare</enum>
+        <enum internal="SPARE_170" value="170">Spare</enum>
+        <enum internal="SPARE_171" value="171">Spare</enum>
+        <enum internal="SPARE_172" value="172">Spare</enum>
+        <enum internal="SPARE_173" value="173">Spare</enum>
+        <enum internal="SPARE_174" value="174">Spare</enum>
+        <enum internal="SPARE_175" value="175">Spare</enum>
+        <enum internal="SPARE_176" value="176">Spare</enum>
+        <enum internal="SPARE_177" value="177">Spare</enum>
+        <enum internal="SPARE_178" value="178">Spare</enum>
+        <enum internal="SPARE_179" value="179">Spare</enum>
+        <enum internal="SPARE_180" value="180">Spare</enum>
+        <enum internal="SPARE_181" value="181">Spare</enum>
+        <enum internal="SPARE_182" value="182">Spare</enum>
+        <enum internal="SPARE_183" value="183">Spare</enum>
+        <enum internal="SPARE_184" value="184">Spare</enum>
+        <enum internal="SPARE_185" value="185">Spare</enum>
+        <enum internal="SPARE_186" value="186">Spare</enum>
+        <enum internal="SPARE_187" value="187">Spare</enum>
+        <enum internal="SPARE_188" value="188">Spare</enum>
+        <enum internal="SPARE_189" value="189">Spare</enum>
+        <enum internal="SPARE_190" value="190">Spare</enum>
+        <enum internal="SPARE_191" value="191">Spare</enum>
+        <enum internal="SPARE_192" value="192">Spare</enum>
+        <enum internal="SPARE_193" value="193">Spare</enum>
+        <enum internal="SPARE_194" value="194">Spare</enum>
+        <enum internal="SPARE_195" value="195">Spare</enum>
+        <enum internal="SPARE_196" value="196">Spare</enum>
+        <enum internal="SPARE_197" value="197">Spare</enum>
+        <enum internal="SPARE_198" value="198">Spare</enum>
+        <enum internal="SPARE_199" value="199">Spare</enum>
+        <enum internal="SPARE_200" value="200">Spare</enum>
+        <enum internal="SPARE_201" value="201">Spare</enum>
+        <enum internal="SPARE_202" value="202">Spare</enum>
+        <enum internal="SPARE_203" value="203">Spare</enum>
+        <enum internal="SPARE_204" value="204">Spare</enum>
+        <enum internal="SPARE_205" value="205">Spare</enum>
+        <enum internal="SPARE_206" value="206">Spare</enum>
+        <enum internal="SPARE_207" value="207">Spare</enum>
+        <enum internal="SPARE_208" value="208">Spare</enum>
+        <enum internal="SPARE_209" value="209">Spare</enum>
+        <enum internal="SPARE_210" value="210">Spare</enum>
+        <enum internal="SPARE_211" value="211">Spare</enum>
+        <enum internal="SPARE_212" value="212">Spare</enum>
+        <enum internal="SPARE_213" value="213">Spare</enum>
+        <enum internal="SPARE_214" value="214">Spare</enum>
+        <enum internal="SPARE_215" value="215">Spare</enum>
+        <enum internal="SPARE_216" value="216">Spare</enum>
+        <enum internal="SPARE_217" value="217">Spare</enum>
+        <enum internal="SPARE_218" value="218">Spare</enum>
+        <enum internal="SPARE_219" value="219">Spare</enum>
+        <enum internal="SPARE_220" value="220">Spare</enum>
+        <enum internal="SPARE_221" value="221">Spare</enum>
+        <enum internal="SPARE_222" value="222">Spare</enum>
+        <enum internal="SPARE_223" value="223">Spare</enum>
+        <enum internal="SPARE_224" value="224">Spare</enum>
+        <enum internal="SPARE_225" value="225">Spare</enum>
+        <enum internal="SPARE_226" value="226">Spare</enum>
+        <enum internal="SPARE_227" value="227">Spare</enum>
+        <enum internal="SPARE_228" value="228">Spare</enum>
+        <enum internal="SPARE_229" value="229">Spare</enum>
+        <enum internal="SPARE_230" value="230">Spare</enum>
+        <enum internal="SPARE_231" value="231">Spare</enum>
+        <enum internal="SPARE_232" value="232">Spare</enum>
+        <enum internal="SPARE_233" value="233">Spare</enum>
+        <enum internal="SPARE_234" value="234">Spare</enum>
+        <enum internal="SPARE_235" value="235">Spare</enum>
+        <enum internal="SPARE_236" value="236">Spare</enum>
+        <enum internal="SPARE_237" value="237">Spare</enum>
+        <enum internal="SPARE_238" value="238">Spare</enum>
+        <enum internal="SPARE_239" value="239">Spare</enum>
+        <enum internal="SPARE_240" value="240">Spare</enum>
+        <enum internal="SPARE_241" value="241">Spare</enum>
+        <enum internal="SPARE_242" value="242">Spare</enum>
+        <enum internal="SPARE_243" value="243">Spare</enum>
+        <enum internal="SPARE_244" value="244">Spare</enum>
+        <enum internal="SPARE_245" value="245">Spare</enum>
+        <enum internal="SPARE_246" value="246">Spare</enum>
+        <enum internal="SPARE_247" value="247">Spare</enum>
+        <enum internal="SPARE_248" value="248">Spare</enum>
+        <enum internal="SPARE_249" value="249">Spare</enum>
+        <enum internal="SPARE_250" value="250">Spare</enum>
+        <enum internal="SPARE_251" value="251">Spare</enum>
+        <enum internal="SPARE_252" value="252">Spare</enum>
+        <enum internal="SPARE_253" value="253">Spare</enum>
+        <enum internal="SPARE_254" value="254">Spare</enum>
+        <enum internal="SPARE_255" value="255">Spare</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>SUB_CAUSE_CODE</name>
+      <type>ENUM</type>
+      <description>This information element provides "Detailed reason for failure" information. This information should be analyzed together with the "Cause Code" parameter and the "CAUSE_PROTOCOL" parameter.</description>
+      <detaileddescription></detaileddescription>
+      <numberofbits>10</numberofbits>
+      <range>
+        <low>0</low>
+        <high>1023</high>
+      </range>
+      <enumeration>
+        <enum internal="NO_INFORMATION" value="0">No information</enum>
+        <enum internal="ABORTED_BY_SESSION_DELETION" value="10">Aborted by session deletion</enum>
+        <enum internal="NO_RESPONSE_FROM_MME_OR_SGSN" value="11">No response from MME or SGSN</enum>
+        <enum internal="NO_RESPONSE_FROM_PGW" value="12">No response from PGW</enum>
+        <enum internal="INTERNALLY_TRIGGERED" value="13">Internally triggered</enum>
+        <enum internal="BEARERS_IN_MULTIPLE_PDN_CONNECTIONS" value="14">Bearers in multiple PDN connections</enum>
+        <enum internal="EXPECTED_BEARERS_MISSING_IN_MESSAGE" value="15">Expected bearers missing in message</enum>
+        <enum internal="UNEXPECTED_BEARERS_PRESENT_IN_MESSAGE" value="16">Unexpected bearers present in message</enum>
+        <enum internal="TEID_UNKNOWN" value="17">TEID is unknown</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>PDN_ID</name>
+      <type>UINT</type>
+      <description>The PDN identifier is based on the Charging ID.</description>
+      <detaileddescription>Defined in TS 32.251.</detaileddescription>
+      <numberofbits>32</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>SERVICE_UL_BYTES</name>
+      <type>UINT</type>
+      <description>Indicates how many bytes that have been forwarded by the EPG in the uplink direction for the service.</description>
+      <detaileddescription></detaileddescription>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>SERVICE_DL_BYTES</name>
+      <type>UINT</type>
+      <description>Indicates how many bytes that have been forwarded by the EPG in the downlink direction for the service.</description>
+      <detaileddescription></detaileddescription>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_UL_BYTES</name>
+      <type>UINT</type>
+      <description>Indicates how many bytes that have been forwarded by the EPG in the uplink direction for the bearer.</description>
+      <detaileddescription></detaileddescription>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_DL_BYTES</name>
+      <type>UINT</type>
+      <description>Indicates how many bytes that have been forwarded by the EPG in the downlink direction for the bearer.</description>
+      <detaileddescription></detaileddescription>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_UL_PACKETS</name>
+      <type>UINT</type>
+      <description>Indicates how many packets that have been forwarded by the EPG in the uplink direction for the bearer.</description>
+      <detaileddescription></detaileddescription>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_DL_PACKETS</name>
+      <type>UINT</type>
+      <description>Indicates how many packets that have been forwarded by the EPG in the downlink direction for the bearer.</description>
+      <detaileddescription></detaileddescription>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>RATING_GROUP</name>
+      <type>UINT</type>
+      <description>Rating Group identifier.</description>
+      <detaileddescription></detaileddescription>
+      <numberofbits>32</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>SERVICE_IDENTIFIER</name>
+      <type>UINT</type>
+      <description>Service Identifier.</description>
+      <detaileddescription></detaileddescription>
+      <numberofbits>32</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>URI_ID</name>
+      <type>UINT</type>
+      <description>Numerical Uniform Resource Identifier.</description>
+      <detaileddescription></detaileddescription>
+      <numberofbits>32</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>URI_NAME</name>
+      <type>BYTEARRAY</type>
+      <description>Textual Uniform Resource Identifier, defined as an ASCII string.</description>
+      <detaileddescription>The parameter is byte-aligned and it is preceded by a length-field.</detaileddescription>
+      <lengthbits>8</lengthbits>
+    </parametertype>
+    <parametertype>
+      <name>RULE_SPACE</name>
+      <type>BYTEARRAY</type>
+      <description>Rule Space name, defined as an ASCII string.</description>
+      <detaileddescription>The parameter is byte-aligned and it is preceded by a length-field.</detaileddescription>
+      <lengthbits>7</lengthbits>
+      <validlength>
+        <low>1</low>
+        <high>64</high>
+      </validlength>
+    </parametertype>
+  </parametertypes>
+  <structuretypes>
+    <structuretype>
+      <name>HEADER</name>
+      <elements>
+        <param type="EVENT_ID">EVENT_ID</param>
+        <param type="EVENT_RESULT">EVENT_RESULT</param>
+        <param type="TIME_HOUR">TIME_HOUR</param>
+        <param type="TIME_MINUTE">TIME_MINUTE</param>
+        <param type="TIME_SECOND">TIME_SECOND</param>
+        <param type="TIME_MILLISECOND">TIME_MILLISECOND</param>
+        <param type="DURATION">DURATION</param>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>TAI</name>
+      <elements>
+        <param type="MCC" optional="true">MCC</param>
+        <param type="MNC" optional="true">MNC</param>
+        <param type="TAC" optional="true">TAC</param>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>UE_INFO</name>
+      <elements>
+        <param type="IMSI" optional="true">IMSI</param>
+        <param type="IMSI_VALIDATION" optional="true">IMSI_VALIDATION</param>
+        <param type="IMEISV" optional="true">IMEISV</param>
+        <struct type="TAI">TAI</struct>
+        <param type="ECI" optional="true">ECI</param>
+        <param type="LAC" optional="true">LAC</param>
+        <param type="RAC" optional="true">RAC</param>
+        <param type="CI" optional="true">CI</param>
+        <param type="SAC" optional="true">SAC</param>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>APN_AMBR</name>
+      <elements>
+        <param type="APN_AMBR_UL" optional="true">APN_AMBR_UL</param>
+        <param type="APN_AMBR_DL" optional="true">APN_AMBR_DL</param>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>IPADDRESS_STRUCT</name>
+      <elements>
+        <param type="IPV4" optional="true">IPV4</param>
+        <param type="IPV6" optional="true">IPV6</param>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>BEARER_STATISTICS</name>
+      <elements>
+        <param type="BEARER_SENT_DL_PACKETS" optional="true">SENT_DL_PACKETS</param>
+        <param type="BEARER_SENT_DL_BYTES" optional="true">SENT_DL_BYTES</param>
+        <param type="BEARER_RCVD_UL_PACKETS" optional="true">RCVD_UL_PACKETS</param>
+        <param type="BEARER_RCVD_UL_BYTES" optional="true">RCVD_UL_BYTES</param>
+        <param type="BEARER_DROPPED_DL_PACKETS" optional="true">DROPPED_DL_PACKETS</param>
+        <param type="BEARER_DROPPED_UL_PACKETS" optional="true">DROPPED_UL_PACKETS</param>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>BEARER_QOS</name>
+      <elements>
+        <param type="BEARER_QCI" optional="true">QCI</param>
+        <param type="ARP_PRIORITY_LEVEL" optional="true">ARP_PRIORITY_LEVEL</param>
+        <param type="ARP_PCI" optional="true">ARP_CAPABILITY</param>
+        <param type="ARP_PVI" optional="true">ARP_VULNERABILITY</param>
+        <param type="BEARER_MBR_UL" optional="true">MBR_UL</param>
+        <param type="BEARER_MBR_DL" optional="true">MBR_DL</param>
+        <param type="BEARER_GBR_UL" optional="true">GBR_UL</param>
+        <param type="BEARER_GBR_DL" optional="true">GBR_DL</param>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>BEARER_INFO</name>
+      <elements>
+        <param type="BEARER_ID" optional="true">EPS_BEARER_ID</param>
+        <param type="BEARER_CAUSE" optional="true">BEARER_CAUSE</param>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>BEARER_INFO_STATISTICS</name>
+      <elements>
+        <struct type="BEARER_INFO">BEARER_INFO</struct>
+        <struct type="BEARER_STATISTICS">BEARER_STATISTICS</struct>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>BEARER_INFO_QOS</name>
+      <elements>
+        <struct type="BEARER_INFO">BEARER_INFO</struct>
+        <struct type="BEARER_QOS">BEARER_QOS</struct>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>PDN_INFO</name>
+      <elements>
+        <param type="BEARER_ID" optional="true">DEFAULT_BEARER_ID</param>
+        <param type="APN" optional="true">APN</param>
+        <struct type="IPADDRESS_STRUCT">PGW_ADDRESS</struct>
+        <struct type="IPADDRESS_STRUCT">ALLOCATED_UE_ADDRESS</struct>
+        <struct type="APN_AMBR">APN_AMBR</struct>
+        <param type="PDN_ID" optional="true">PDN_ID</param>
+        <param type="RULE_SPACE" optional="true">RULE_SPACE</param>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>BEARER_USAGE</name>
+      <elements>
+        <param type="BEARER_UL_PACKETS" optional="true">BEARER_UL_PACKETS</param>
+        <param type="BEARER_DL_PACKETS" optional="true">BEARER_DL_PACKETS</param>
+        <param type="BEARER_UL_BYTES" optional="true">BEARER_UL_BYTES</param>
+        <param type="BEARER_DL_BYTES" optional="true">BEARER_DL_BYTES</param>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>BEARER_USAGE_INFO</name>
+      <elements>
+        <struct type="BEARER_INFO">BEARER_INFO</struct>
+        <struct type="BEARER_USAGE">BEARER_USAGE</struct>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>SERVICE_INFO</name>
+      <elements>
+        <param type="RATING_GROUP" optional="true">RATING_GROUP</param>
+        <param type="SERVICE_IDENTIFIER" optional="true">SERVICE_IDENTIFIER</param>
+        <param type="URI_NAME" optional="true">URI_NAME</param>
+        <param type="URI_ID" optional="true">URI_ID</param>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>SERVICE_USAGE</name>
+      <elements>
+        <param type="SERVICE_UL_BYTES" optional="true">SERVICE_UL_BYTES</param>
+        <param type="SERVICE_DL_BYTES" optional="true">SERVICE_DL_BYTES</param>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>SERVICE_USAGE_INFO</name>
+      <elements>
+        <struct type="SERVICE_INFO">SERVICE_INFO</struct>
+        <struct type="SERVICE_USAGE">SERVICE_USAGE</struct>
+      </elements>
+    </structuretype>
+  </structuretypes>
+  <events>
+    <event>
+      <name>SESSION_DELETION</name>
+      <id>0</id>
+      <triggerdescription></triggerdescription>
+      <comment>Provides information when a session is deleted.</comment>
+      <elements>
+        <struct type="HEADER">HEADER</struct>
+        <param type="CAUSE_PROTOCOL">CAUSE_PROTOCOL</param>
+        <param type="CAUSE_CODE">CAUSE_CODE</param>
+        <param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+        <param type="EVENT_TRIGGER">EVENT_TRIGGER</param>
+        <param type="ORIGINATING_NODE">ORIGINATING_NODE</param>
+        <struct type="PDN_INFO">PDN_INFO</struct>
+        <struct type="UE_INFO">UE_INFO</struct>
+        <struct seqmaxlen="11" type="BEARER_INFO_STATISTICS">BEARERS</struct>
+        <struct type="IPADDRESS_STRUCT">MME_OR_SGSN</struct>
+      </elements>
+    </event>
+    <event>
+      <name>BEARER_DELETION</name>
+      <id>1</id>
+      <triggerdescription></triggerdescription>
+      <comment>Provides information when dedicated bearers or secondary PDP contexts are deleted.</comment>
+      <elements>
+        <struct type="HEADER">HEADER</struct>
+        <param type="CAUSE_PROTOCOL">CAUSE_PROTOCOL</param>
+        <param type="CAUSE_CODE">CAUSE_CODE</param>
+        <param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+        <param type="EVENT_TRIGGER">EVENT_TRIGGER</param>
+        <param type="ORIGINATING_NODE">ORIGINATING_NODE</param>
+        <struct type="PDN_INFO">PDN_INFO</struct>
+        <struct type="UE_INFO">UE_INFO</struct>
+        <struct seqmaxlen="11" type="BEARER_INFO_STATISTICS">BEARERS</struct>
+        <struct type="IPADDRESS_STRUCT">MME_OR_SGSN</struct>
+      </elements>
+    </event>
+    <event>
+      <name>SESSION_CREATION</name>
+      <id>2</id>
+      <triggerdescription></triggerdescription>
+      <comment>Provides information when a session is created.</comment>
+      <elements>
+        <struct type="HEADER">HEADER</struct>
+        <param type="CAUSE_PROTOCOL">CAUSE_PROTOCOL</param>
+        <param type="CAUSE_CODE">CAUSE_CODE</param>
+        <param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+        <param type="EVENT_TRIGGER">EVENT_TRIGGER</param>
+        <param type="ORIGINATING_NODE">ORIGINATING_NODE</param>
+        <param type="RAT" optional="true">RAT</param>
+        <struct type="PDN_INFO">PDN_INFO</struct>
+        <struct type="UE_INFO">UE_INFO</struct>
+        <struct seqmaxlen="11" type="BEARER_INFO_QOS">BEARERS</struct>
+        <struct type="IPADDRESS_STRUCT">MME_OR_SGSN</struct>
+      </elements>
+    </event>
+    <event>
+      <name>BEARER_CREATION</name>
+      <id>3</id>
+      <triggerdescription></triggerdescription>
+      <comment>Provides information when dedicated bearers or secondary PDP contexts are created.</comment>
+      <elements>
+        <struct type="HEADER">HEADER</struct>
+        <param type="CAUSE_PROTOCOL">CAUSE_PROTOCOL</param>
+        <param type="CAUSE_CODE">CAUSE_CODE</param>
+        <param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+        <param type="EVENT_TRIGGER">EVENT_TRIGGER</param>
+        <param type="ORIGINATING_NODE">ORIGINATING_NODE</param>
+        <struct type="PDN_INFO">PDN_INFO</struct>
+        <struct type="UE_INFO">UE_INFO</struct>
+        <struct seqmaxlen="11" type="BEARER_INFO_QOS">BEARERS</struct>
+        <struct type="IPADDRESS_STRUCT">MME_OR_SGSN</struct>
+      </elements>
+    </event>
+    <event>
+      <name>BEARER_MODIFICATION</name>
+      <id>4</id>
+      <triggerdescription></triggerdescription>
+      <comment>Provides information when bearers are modified.</comment>
+      <elements>
+        <struct type="HEADER">HEADER</struct>
+        <param type="CAUSE_PROTOCOL">CAUSE_PROTOCOL</param>
+        <param type="CAUSE_CODE">CAUSE_CODE</param>
+        <param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+        <param type="EVENT_TRIGGER">EVENT_TRIGGER</param>
+        <param type="ORIGINATING_NODE">ORIGINATING_NODE</param>
+        <param type="RAT" optional="true">RAT</param>
+        <struct type="PDN_INFO">PDN_INFO</struct>
+        <struct type="UE_INFO">UE_INFO</struct>
+        <struct seqmaxlen="11" type="BEARER_INFO">BEARERS</struct>
+        <struct type="IPADDRESS_STRUCT">MME_OR_SGSN</struct>
+      </elements>
+    </event>
+    <event>
+      <name>BEARER_UPDATE</name>
+      <id>5</id>
+      <triggerdescription></triggerdescription>
+      <comment>Provides information when the bearers are updated.</comment>
+      <elements>
+        <struct type="HEADER">HEADER</struct>
+        <param type="CAUSE_PROTOCOL">CAUSE_PROTOCOL</param>
+        <param type="CAUSE_CODE">CAUSE_CODE</param>
+        <param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+        <param type="EVENT_TRIGGER">EVENT_TRIGGER</param>
+        <param type="ORIGINATING_NODE">ORIGINATING_NODE</param>
+        <struct type="PDN_INFO">PDN_INFO</struct>
+        <struct type="UE_INFO">UE_INFO</struct>
+        <struct seqmaxlen="11" type="BEARER_INFO_QOS">BEARERS</struct>
+        <struct type="IPADDRESS_STRUCT">MME_OR_SGSN</struct>
+      </elements>
+    </event>
+    <event>
+      <name>SESSION_INFO</name>
+      <id>6</id>
+      <triggerdescription></triggerdescription>
+      <comment>Provides information when a session is monitored.</comment>
+      <elements>
+        <struct type="HEADER">HEADER</struct>
+        <struct type="UE_INFO">UE_INFO</struct>
+        <struct type="PDN_INFO">PDN_INFO</struct>
+      </elements>
+    </event>
+    <event>
+      <name>DATA_USAGE</name>
+      <id>7</id>
+      <triggerdescription></triggerdescription>
+      <comment>Provides usage information</comment>
+      <elements>
+        <struct type="HEADER">HEADER</struct>
+        <struct type="UE_INFO">UE_INFO</struct>
+        <struct type="PDN_INFO">PDN_INFO</struct>
+        <struct seqmaxlen="11" type="BEARER_USAGE_INFO">BEARER_USAGE_INFO</struct>
+        <struct seqmaxlen="255" type="SERVICE_USAGE_INFO">SERVICE_USAGE_INFO</struct>
+      </elements>
+    </event>
+    <event>
+      <name>SESSION_SUSPENSION</name>
+      <id>8</id>
+      <triggerdescription></triggerdescription>
+      <comment>Provides information when a session is suspended.</comment>
+      <elements>
+        <struct type="HEADER">HEADER</struct>
+        <param type="CAUSE_PROTOCOL">CAUSE_PROTOCOL</param>
+        <param type="CAUSE_CODE">CAUSE_CODE</param>
+        <param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+        <param type="EVENT_TRIGGER">EVENT_TRIGGER</param>
+        <param type="ORIGINATING_NODE">ORIGINATING_NODE</param>
+        <struct type="PDN_INFO">PDN_INFO</struct>
+        <struct type="UE_INFO">UE_INFO</struct>
+        <struct type="IPADDRESS_STRUCT">MME_OR_SGSN</struct>
+      </elements>
+    </event>
+    <event>
+      <name>SESSION_RESUME</name>
+      <id>9</id>
+      <triggerdescription></triggerdescription>
+      <comment>Provides information when a session is explicitly resumed.</comment>
+      <elements>
+        <struct type="HEADER">HEADER</struct>
+        <param type="CAUSE_PROTOCOL">CAUSE_PROTOCOL</param>
+        <param type="CAUSE_CODE">CAUSE_CODE</param>
+        <param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+        <param type="EVENT_TRIGGER">EVENT_TRIGGER</param>
+        <param type="ORIGINATING_NODE">ORIGINATING_NODE</param>
+        <struct type="PDN_INFO">PDN_INFO</struct>
+        <struct type="UE_INFO">UE_INFO</struct>
+        <struct type="IPADDRESS_STRUCT">MME_OR_SGSN</struct>
+      </elements>
+    </event>
+  </events>
+  <records>
+    <record>
+      <!-- Not used by EPG currently. It is used for EBM log file-->
+      <name>HEADER_RECORD</name>
+      <type>0</type>
+      <elements>
+        <param type="RECORD_LENGTH">RECORD_LENGTH</param>
+        <param type="RECORD_TYPE">RECORD_TYPE</param>
+        <param type="FILE_FORMAT_VERSION">FILE_FORMAT_VERSION</param>
+        <param type="FILE_INFORMATION_VERSION">FILE_INFORMATION_VERSION</param>
+        <param type="TIME_YEAR">TIME_YEAR</param>
+        <param type="TIME_MONTH">TIME_MONTH</param>
+        <param type="TIME_DAY">TIME_DAY</param>
+        <param type="BYTE_HOUR">BYTE_HOUR</param>
+        <param type="BYTE_MINUTE">BYTE_MINUTE</param>
+        <param type="BYTE_SECOND">BYTE_SECOND</param>
+      </elements>
+    </record>
+    <record>
+      <name>EVENT_RECORD</name>
+      <type>1</type>
+      <elements>
+        <param type="RECORD_LENGTH">RECORD_LENGTH</param>
+        <param type="RECORD_TYPE">RECORD_TYPE</param>
+        <content />
+      </elements>
+    </record>
+    <record>
+      <!-- Not used by EPG currently. It is used for EBM log file-->
+      <name>ERROR_RECORD</name>
+      <type>2</type>
+      <elements>
+        <param type="RECORD_LENGTH">RECORD_LENGTH</param>
+        <param type="RECORD_TYPE">RECORD_TYPE</param>
+        <param type="BYTE_HOUR">BYTE_HOUR</param>
+        <param type="BYTE_MINUTE">BYTE_MINUTE</param>
+        <param type="BYTE_SECOND">BYTE_SECOND</param>
+        <param type="ERROR_TYPE">ERROR_TYPE</param>
+      </elements>
+    </record>
+    <record>      
+     <!-- Not used by EPG currently. It is used for EBM log file-->
+      <name>FOOTER_RECORD</name>
+      <type>3</type>
+      <elements>
+        <param type="RECORD_LENGTH">RECORD_LENGTH</param>
+        <param type="RECORD_TYPE">RECORD_TYPE</param>
+        <param type="FILE_TERMINATION_CAUSE">FILE_TERMINATION_CAUSE</param>
+      </elements>
+    </record>
+    <record>
+      <name>STREAM_HEADER_RECORD</name>
+      <type>4</type>
+      <elements>
+        <param type="RECORD_LENGTH">RECORD_LENGTH</param>
+        <param type="RECORD_TYPE">RECORD_TYPE</param>
+        <param type="FILE_FORMAT_VERSION">FILE_FORMAT_VERSION</param>
+        <param type="FILE_INFORMATION_VERSION">FILE_INFORMATION_VERSION</param>
+        <param type="TIME_YEAR">TIME_YEAR</param>
+        <param type="TIME_MONTH">TIME_MONTH</param>
+        <param type="TIME_DAY">TIME_DAY</param>
+        <param type="BYTE_HOUR">BYTE_HOUR</param>
+        <param type="BYTE_MINUTE">BYTE_MINUTE</param>
+        <param type="BYTE_SECOND">BYTE_SECOND</param>
+        <param type="BYTE_UTC_SIGN">UTC_SIGN</param>
+        <param type="BYTE_HOUR">UTC_OFFSET_HOUR</param>
+        <param type="BYTE_MINUTE">UTC_OFFSET_MINUTE</param>
+        <param type="CAUSE_OF_HEADER">CAUSE_OF_HEADER</param>
+        <param type="NODE_ID">NODE_ID</param>
+      </elements>
+    </record>
+    <record>
+      <name>STREAM_ERROR_RECORD</name>
+      <type>5</type>
+      <elements>
+        <param type="RECORD_LENGTH">RECORD_LENGTH</param>
+        <param type="RECORD_TYPE">RECORD_TYPE</param>
+        <param type="BYTE_HOUR">BYTE_HOUR</param>
+        <param type="BYTE_MINUTE">BYTE_MINUTE</param>
+        <param type="BYTE_SECOND">BYTE_SECOND</param>
+        <param type="ERROR_TYPE">ERROR_TYPE</param>
+        <param type="NUMBER_OF_DROPPED_EVENTS">NUMBER_OF_DROPPED_EVENTS</param>
+      </elements>
+    </record>
+  </records>
+</eventspecification>
